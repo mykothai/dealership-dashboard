@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LandingPage from '@components/LandingPage'
 import { useState } from 'react'
 import { getAllUsers } from './api/UserApi'
+import NotFoundPage from '@components/NotFoundPage'
 
 export interface User {
   id: number
@@ -47,6 +48,7 @@ function App() {
           path="/home"
           element={loggedInUser && <LandingPage session={loggedInUser} />}
         />
+        <Route path="/404" element={<NotFoundPage />} />
       </Routes>
     </Router>
   )
