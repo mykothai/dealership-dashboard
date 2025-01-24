@@ -1,19 +1,10 @@
 import LoginPage from '@components/Login/LoginPage'
-import { UserRole } from './constants'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LandingPage from '@components/LandingPage'
+import NotFoundPage from '@components/NotFoundPage'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
 import { getAllUsers } from './api/UserApi'
-import NotFoundPage from '@components/NotFoundPage'
-
-export interface User {
-  id: number
-  first_name: string
-  last_name: string
-  email: string
-  role: UserRole
-  profile_picture_url: string
-}
+import { User } from '@components/Users/UserDashboard'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
