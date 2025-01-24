@@ -1,15 +1,35 @@
+import { useState } from 'react'
 import './LoginPage.css'
 import { MdOutlineEmail } from 'react-icons/md'
+import { Navigate } from 'react-router-dom'
 
-export default function LoginPage() {
+export default function LoginPage({ getUsers, isLoggedIn }) {
+  const [email, setEmail] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    getUsers(email)
+    setEmail('') // Clear the input field
+  }
+
+  if (isLoggedIn) {
+    return <Navigate to="/home" />
+  }
+
   return (
     <>
       <div className="wrapper">
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <h1>Login</h1>
           <div className="input-box">
             <MdOutlineEmail className="icon" />
-            <input type="text" placeholder="email" required />
+            <input
+              type="text"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
 
           <button type="submit">Login</button>

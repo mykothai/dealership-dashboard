@@ -1,8 +1,9 @@
 import LoginPage from '@components/Login/LoginPage'
-import { getAllUsers } from './api/UserApi'
-import { useState } from 'react'
-import LandingPage from '@components/LandingPage'
 import { UserRole } from './constants'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import LandingPage from '@components/LandingPage'
+import { useState } from 'react'
+import { getAllUsers } from './api/UserApi'
 
 export interface User {
   id: number
@@ -14,13 +15,13 @@ export interface User {
 }
 
 function App() {
-  const [users, setUsers] = useState([])
   const [loggedInUser, setLoggedInUser] = useState(null)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   async function getUsers(email: string) {
     // call data base to get user by email
     try {
-      const users = await getAllUsers().then((res) => res.data) || [] 
+      const users = (await getAllUsers().then((res) => res.data)) || []
       const currentUser = users.filter((user: User) => user.email === email)[0]
 
       if (!currentUser) {
@@ -28,7 +29,7 @@ function App() {
         return
       }
 
-      setUsers(users)
+      setIsLoggedIn(true)
       setLoggedInUser(currentUser)
     } catch (error) {
       console.error('Failed to retrieve inventory.', error)
@@ -36,10 +37,18 @@ function App() {
   }
 
   return (
-    <>
-      <LoginPage getUsers={getUsers} />
-      {loggedInUser && <LandingPage session={loggedInUser} users={users} />}
-    </>
+    <Router>
+      <Routes>
+        <Route
+          path=""
+          element={<LoginPage getUsers={getUsers} isLoggedIn={isLoggedIn} />}
+        />
+        <Route
+          path="/home"
+          element={loggedInUser && <LandingPage session={loggedInUser} />}
+        />
+      </Routes>
+    </Router>
   )
 }
 
