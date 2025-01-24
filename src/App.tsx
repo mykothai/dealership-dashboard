@@ -1,7 +1,12 @@
+import LoginPage from '@components/Login/LoginPage'
+import { useState } from 'react'
+
 function App() {
+  const [user, setUser] = useState(null)
+
   return (
     <>
-      <h1>Dashboard</h1>
+      <LoginPage />
     </>
   )
 }
