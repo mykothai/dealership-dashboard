@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #465362;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,11 +34,11 @@ h1 {
   text-align: center;
 }
 
-button:hover {
-  border-color: #646cff;
+button {
+  background-color: #ed254e;
+  cursor: pointer;
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+button:hover {
+  border-color: #646cff;
 }
