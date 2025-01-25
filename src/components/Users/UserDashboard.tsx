@@ -1,4 +1,4 @@
-import { UserRole } from "../../constants"
+import { UserRole } from '../../constants'
 
 export interface User {
   id: number
@@ -9,6 +9,6 @@ export interface User {
   profile_picture_url: string
 }
 
-export default function UserDashboard() {
+export default function UserDashboard({ session }) {
   return <></>
 }

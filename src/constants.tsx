@@ -9,3 +9,10 @@ export enum UserRole {
   PRINCIPAL = 'principal',
   SALES_REP = 'sales-rep',
 }
+
+export type UserRoleType = 'principal' | 'admin' | 'manager' | 'sales-rep'
+
+export enum VehicleStatus {
+  IN_STOCK = 'in-stock',
+  SOLD = 'sold',
+}
