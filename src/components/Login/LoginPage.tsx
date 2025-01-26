@@ -2,8 +2,9 @@ import { useState } from 'react'
 import './LoginPage.css'
 import { MdOutlineEmail } from 'react-icons/md'
 import { Navigate } from 'react-router-dom'
+import { UserRole } from '../../constants'
 
-export default function LoginPage({ getUsers, isLoggedIn }) {
+export default function LoginPage({ getUsers, session, isLoggedIn }) {
   const [email, setEmail] = useState('')
 
   const handleSubmit = (e) => {
@@ -15,7 +16,19 @@ export default function LoginPage({ getUsers, isLoggedIn }) {
   }
 
   if (isLoggedIn) {
-    return <Navigate to="/" />
+    switch (session.role) {
+      case UserRole.PRINCIPAL || UserRole.MANAGER:
+        return <Navigate to="/sales" />
+      // return <SaleDashboard session={session} />
+      case UserRole.ADMIN:
+        return <Navigate to="/users" />
+
+      case UserRole.SALES_REP:
+        return <Navigate to="/vehicles" />
+
+      default:
+        return <Navigate to="/404" />
+    }
   }
 
   return (

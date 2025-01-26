@@ -1,5 +1,4 @@
 import LoginPage from '@components/Login/LoginPage'
-import LandingPage from '@components/LandingPage'
 import NotFoundPage from '@components/NotFoundPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
@@ -26,7 +25,7 @@ function App() {
       }
 
       setIsLoggedIn(true)
-      setSession(currentUser)
+      setSession(currentUser) /* TODO: save session in local storage */
     } catch (error) {
       console.error('Failed to retrieve user.', error)
     }
@@ -37,13 +36,16 @@ function App() {
       <Router>
         {session && <SidebarMenu session={session} />}
         <Routes>
+          {/* TODO: protected routes */}
           <Route
             path=""
-            element={<LoginPage getUsers={getUsers} isLoggedIn={isLoggedIn} />}
-          />
-          <Route
-            path="/"
-            element={session && <LandingPage session={session} />}
+            element={
+              <LoginPage
+                getUsers={getUsers}
+                session={session}
+                isLoggedIn={isLoggedIn}
+              />
+            }
           />
           <Route path="/sales" element={<SaleDashboard session={session} />} />
           <Route path="/users" element={<UserDashboard session={session} />} />
