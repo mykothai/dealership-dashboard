@@ -23,6 +23,7 @@ import { VehicleStatus } from '../../constants'
 import { getComparator } from '../../helpers'
 import './DataTable.css'
 import SellingDialog from '@components/Dialogs/SellingDialog'
+import { styled } from '@mui/material/styles'
 
 export default function DataTable({
   headers,
@@ -218,9 +219,12 @@ export default function DataTable({
           <TableBody>
             {paginatedData.length ? (
               paginatedData.map((row, rowIndex) => (
-                <TableRow key={rowIndex}>
+                <StyledTableRow key={rowIndex}>
                   {headers.map((header) => (
-                    <TableCell key={header.key} style={{ color: 'white' }}>
+                    <TableCell
+                      key={header.key}
+                      style={{ color: 'white', borderBottom: 'none' }}
+                    >
                       {header.key === 'photo_url' ? (
                         <img
                           src={row[header.key]}
@@ -233,7 +237,7 @@ export default function DataTable({
                     </TableCell>
                   ))}
                   {onSale && (
-                    <TableCell>
+                    <TableCell style={{ borderBottom: 'none' }}>
                       {row['status'] === VehicleStatus.IN_STOCK && (
                         <IconButton onClick={() => handleSell(row)}>
                           <MdAttachMoney className="action-icon" />
@@ -243,7 +247,7 @@ export default function DataTable({
                   )}
 
                   {onEdit && (
-                    <TableCell>
+                    <TableCell style={{ borderBottom: 'none' }}>
                       <IconButton onClick={() => handleEdit(row)}>
                         <MdEdit className="action-icon" />
                       </IconButton>
@@ -251,13 +255,13 @@ export default function DataTable({
                   )}
 
                   {onDelete && (
-                    <TableCell>
+                    <TableCell style={{ borderBottom: 'none' }}>
                       <IconButton onClick={() => onDelete(row)}>
                         <MdDeleteForever className="action-icon" />
                       </IconButton>
                     </TableCell>
                   )}
-                </TableRow>
+                </StyledTableRow>
               ))
             ) : (
               <TableRow>
@@ -417,3 +421,19 @@ export default function DataTable({
     </div>
   )
 }
+
+const StyledTableRow = styled(TableRow)(() => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: '#465362',
+  },
+  '&:nth-of-type(even)': {
+    backgroundColor: '#6B747F',
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+  '&:hover': {
+    backgroundColor: '#011936 !important',
+  },
+}))

@@ -54,10 +54,6 @@ Table {
   font-size: large;
 }
 
-.MuiTableCell-root {
-  border-bottom: none;
-}
-
 .addButton {
   background-color: #ed254e;
 }
