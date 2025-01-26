@@ -10,7 +10,8 @@ import SaleDashboard from '@components/Sales/SaleDashboard'
 import VehicleDashboard from '@components/Vehicles/VehicleDashboard'
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState(null)
+  // use user's email validated against existing users as a 'token'
+  const [session, setSession] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   async function getUsers(email: string) {
@@ -25,7 +26,7 @@ function App() {
       }
 
       setIsLoggedIn(true)
-      setLoggedInUser(currentUser)
+      setSession(currentUser)
     } catch (error) {
       console.error('Failed to retrieve user.', error)
     }
@@ -34,27 +35,21 @@ function App() {
   return (
     <div className="flex">
       <Router>
-        {loggedInUser && <SidebarMenu session={loggedInUser} />}
+        {session && <SidebarMenu session={session} />}
         <Routes>
           <Route
             path=""
             element={<LoginPage getUsers={getUsers} isLoggedIn={isLoggedIn} />}
           />
           <Route
-            path="/home"
-            element={loggedInUser && <LandingPage session={loggedInUser} />}
+            path="/"
+            element={session && <LandingPage session={session} />}
           />
-          <Route
-            path="/sales"
-            element={<SaleDashboard session={loggedInUser} />}
-          />
-          <Route
-            path="/users"
-            element={<UserDashboard session={loggedInUser} />}
-          />
+          <Route path="/sales" element={<SaleDashboard session={session} />} />
+          <Route path="/users" element={<UserDashboard session={session} />} />
           <Route
             path="/vehicles"
-            element={<VehicleDashboard session={loggedInUser} />}
+            element={<VehicleDashboard session={session} />}
           />
 
           <Route path="/404" element={<NotFoundPage />} />

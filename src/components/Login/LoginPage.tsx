@@ -8,12 +8,14 @@ export default function LoginPage({ getUsers, isLoggedIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    // Since we don't have an auth server to verify credentials we'll use
+    // the user's as a way to verify that a user exists in the system
     getUsers(email)
-    setEmail('') // Clear the input field
+    setEmail('')
   }
 
   if (isLoggedIn) {
-    return <Navigate to="/home" />
+    return <Navigate to="/" />
   }
 
   return (
