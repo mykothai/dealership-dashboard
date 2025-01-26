@@ -49,7 +49,7 @@ function App() {
             element={<SaleDashboard session={loggedInUser} />}
           />
           <Route
-            path="/user"
+            path="/users"
             element={<UserDashboard session={loggedInUser} />}
           />
           <Route

@@ -16,3 +16,5 @@ export enum VehicleStatus {
   IN_STOCK = 'in-stock',
   SOLD = 'sold',
 }
+
+export const urlHeaders = ['photo_url', 'profile_picture_url']

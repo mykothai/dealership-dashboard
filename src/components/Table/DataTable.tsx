@@ -19,11 +19,26 @@ import {
 import { MdAdd, MdEdit } from 'react-icons/md'
 import { MdDeleteForever } from 'react-icons/md'
 import { MdAttachMoney } from 'react-icons/md'
-import { VehicleStatus } from '../../constants'
+import { urlHeaders, VehicleStatus } from '../../constants'
 import { getComparator } from '../../helpers'
 import './DataTable.css'
 import SellingDialog from '@components/Dialogs/SellingDialog'
 import { styled } from '@mui/material/styles'
+
+interface Headers {
+  key: string
+  label: string
+}
+
+interface DataTableProps {
+  headers: Headers[]
+  data: Record<string, any>[]
+  onDelete?: Record<string, any>
+  onEdit?: Record<string, any>
+  onAdd?: Record<string, any>
+  onSale?: Record<string, any>
+  rowsPerPage?: number
+}
 
 export default function DataTable({
   headers,
@@ -32,7 +47,7 @@ export default function DataTable({
   onSale,
   onEdit,
   onDelete,
-}) {
+}: DataTableProps) {
   const [searchParams, setSearchParams] = useState('')
   const [currentPage, setCurrentPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(25)
@@ -225,7 +240,7 @@ export default function DataTable({
                       key={header.key}
                       style={{ color: 'white', borderBottom: 'none' }}
                     >
-                      {header.key === 'photo_url' ? (
+                      {urlHeaders.includes(header.key) ? (
                         <img
                           src={row[header.key]}
                           width={60}

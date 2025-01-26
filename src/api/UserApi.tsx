@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import instance from './axiosConfig'
+import { User } from '@components/Users/UserDashboard'
 
 export async function getAllUsers(): Promise<AxiosResponse> {
   try {
@@ -13,11 +14,14 @@ export async function getAllUsers(): Promise<AxiosResponse> {
   }
 }
 
-export async function updateUserById(id: string): Promise<AxiosResponse> {
+export async function updateUserById(
+  id: number,
+  payload: Partial<User>
+): Promise<AxiosResponse> {
   try {
     const apiUrl = `/users/user/${id}`
 
-    return await instance.put(apiUrl)
+    return await instance.put(apiUrl, payload)
   } catch (err) {
     if (axios.isAxiosError(err)) {
       throw err
