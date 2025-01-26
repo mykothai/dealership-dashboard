@@ -22,6 +22,7 @@ import { MdAttachMoney } from 'react-icons/md'
 import { VehicleStatus } from '../../constants'
 import { getComparator } from '../../helpers'
 import './DataTable.css'
+import SellingDialog from '@components/Dialogs/SellingDialog'
 
 export default function DataTable({
   headers,
@@ -38,6 +39,7 @@ export default function DataTable({
   const [sortColumn, setSortColumn] = useState<string | null>(null)
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [addRow, setAddRow] = useState<Record<string, any> | null>(null)
+  const [saleRow, setSaleRow] = useState<Record<string, any> | null>(null)
 
   function handleSort(columnKey: string) {
     if (sortColumn === columnKey) {
@@ -56,7 +58,7 @@ export default function DataTable({
   const filteredData = useMemo(() => {
     if (!searchParams) return sortedData
     return sortedData.filter((row) =>
-      headers.some((header) =>
+      headers.some((header: { key: string | number }) =>
         row[header.key]
           ?.toString()
           .toLowerCase()
@@ -70,32 +72,34 @@ export default function DataTable({
     return filteredData.slice(start, start + rowsPerPage)
   }, [filteredData, currentPage, rowsPerPage])
 
-  function handleChangePage(_event: unknown, newPage: number) {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setCurrentPage(newPage)
   }
 
-  function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchParams(event.target.value)
     setCurrentPage(0)
   }
 
-  function handleChangeRowsPerPage(event: React.ChangeEvent<HTMLInputElement>) {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10))
     setCurrentPage(0)
   }
 
-  function handleEdit(row) {
+  const handleEdit = (row) => {
     setEditRow(row)
   }
 
-  function handleSave() {
+  const handleSaveEdit = () => {
     if (editRow && onEdit) {
       onEdit(editRow)
     }
     setEditRow(null)
   }
 
-  function handleCancel() {
+  const handleCancelEdit = () => {
     setEditRow(null)
   }
 
@@ -116,6 +120,26 @@ export default function DataTable({
 
   const handleCancelAdd = () => {
     setAddRow(null)
+  }
+
+  const handleSell = (row: Record<string, any>) => {
+    setSaleRow({
+      user: '',
+      vehicle: '',
+      selling_price: '',
+      date: '',
+    })
+  }
+
+  const handleSaveSale = (saleData: Record<string, any>) => {
+    if (onSale) {
+      onSale(saleData)
+    }
+    setSaleRow(null)
+  }
+
+  const handleCancelSale = () => {
+    setSaleRow(null)
   }
 
   return (
@@ -211,7 +235,7 @@ export default function DataTable({
                   {onSale && (
                     <TableCell>
                       {row['status'] === VehicleStatus.IN_STOCK && (
-                        <IconButton onClick={() => onSale(row)}>
+                        <IconButton onClick={() => handleSell(row)}>
                           <MdAttachMoney className="action-icon" />
                         </IconButton>
                       )}
@@ -225,6 +249,7 @@ export default function DataTable({
                       </IconButton>
                     </TableCell>
                   )}
+
                   {onDelete && (
                     <TableCell>
                       <IconButton onClick={() => onDelete(row)}>
@@ -267,7 +292,12 @@ export default function DataTable({
         }}
       />
       {/* TODO: make separate components for dialogs */}
-      <Dialog aria-modal className="modal" open={!!editRow} onClose={handleCancel}>
+      <Dialog
+        aria-modal
+        className="modal"
+        open={!!editRow}
+        onClose={handleCancelEdit}
+      >
         <DialogTitle
           style={{
             color: 'white',
@@ -309,15 +339,20 @@ export default function DataTable({
             backgroundColor: '#465362',
           }}
         >
-          <Button className="cancel" onClick={handleCancel}>
+          <Button className="cancel" onClick={handleCancelEdit}>
             Cancel
           </Button>
-          <Button className="save" onClick={handleSave}>
+          <Button className="save" onClick={handleSaveEdit}>
             Save
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog aria-modal className="modal" open={!!addRow} onClose={handleCancel}>
+      <Dialog
+        aria-modal
+        className="modal"
+        open={!!addRow}
+        onClose={handleCancelEdit}
+      >
         <DialogTitle
           style={{
             color: 'white',
@@ -370,6 +405,15 @@ export default function DataTable({
           </Button>
         </DialogActions>
       </Dialog>
+
+      {saleRow && (
+        <SellingDialog
+          open={!!saleRow}
+          saleData={saleRow}
+          onCancel={handleCancelSale}
+          onSave={handleSaveSale}
+        />
+      )}
     </div>
   )
 }

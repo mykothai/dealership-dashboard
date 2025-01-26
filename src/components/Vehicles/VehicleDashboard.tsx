@@ -88,7 +88,7 @@ export default function VehicleDashboard({ session }) {
       }
 
       const response = await sellVehicle(payload)
-      if (response.status === 202) {
+      if (response.status === 200) {
         getVehicles()
       } else {
         throw new Error(response.status.toString())
