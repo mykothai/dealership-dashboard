@@ -40,10 +40,8 @@ function descendingComparator<Key extends keyof any>(
   return bValue.toString().localeCompare(aValue.toString())
 }
 
-type Order = 'asc' | 'desc'
-
 export function getComparator<Key extends keyof any>(
-  order: Order,
+  order: string,
   orderBy: Key
 ): (a: any, b: any) => number {
   return order === 'desc'

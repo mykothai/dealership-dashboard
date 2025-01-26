@@ -16,21 +16,28 @@ import {
   DialogTitle,
   TableSortLabel,
 } from '@mui/material'
-import { MdEdit } from 'react-icons/md'
+import { MdAdd, MdEdit } from 'react-icons/md'
 import { MdDeleteForever } from 'react-icons/md'
 import { MdAttachMoney } from 'react-icons/md'
-
 import { VehicleStatus } from '../../constants'
-import './DataTable.css'
 import { getComparator } from '../../helpers'
+import './DataTable.css'
 
-export default function DataTable({ headers, data, onSale, onEdit, onDelete }) {
+export default function DataTable({
+  headers,
+  data,
+  onAdd,
+  onSale,
+  onEdit,
+  onDelete,
+}) {
   const [searchParams, setSearchParams] = useState('')
   const [currentPage, setCurrentPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(25)
   const [editRow, setEditRow] = useState<Record<string, any> | null>(null)
   const [sortColumn, setSortColumn] = useState<string | null>(null)
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+  const [addRow, setAddRow] = useState<Record<string, any> | null>(null)
 
   function handleSort(columnKey: string) {
     if (sortColumn === columnKey) {
@@ -92,9 +99,28 @@ export default function DataTable({ headers, data, onSale, onEdit, onDelete }) {
     setEditRow(null)
   }
 
+  const handleAdd = () => {
+    const emptyRow = headers.reduce(
+      (acc, header) => ({ ...acc, [header.key]: '' }),
+      {}
+    )
+    setAddRow(emptyRow)
+  }
+
+  const handleSaveAdd = () => {
+    if (addRow && onAdd) {
+      onAdd(addRow)
+    }
+    setAddRow(null)
+  }
+
+  const handleCancelAdd = () => {
+    setAddRow(null)
+  }
+
   return (
-    <div className="tableWrapper">
-      <div className="tableSearch">
+    <div className="table-wrapper">
+      <div className="table-header">
         <TextField
           label="Search"
           variant="outlined"
@@ -107,6 +133,25 @@ export default function DataTable({ headers, data, onSale, onEdit, onDelete }) {
             htmlInput: { style: { color: 'white' } },
           }}
         />
+        {onAdd && (
+          <Button
+            variant="contained"
+            startIcon={<MdAdd />}
+            onClick={() => handleAdd()}
+            sx={{
+              backgroundColor: '#ed254e',
+              color: 'white',
+              fontSize: 'small',
+              margin: '0 0 0 30px',
+              maxHeight: '50px',
+              '&:hover': {
+                backgroundColor: '#011936',
+              },
+            }}
+          >
+            Add New Vehicle
+          </Button>
+        )}
       </div>
       <TableContainer>
         <Table size="small">
@@ -190,7 +235,19 @@ export default function DataTable({ headers, data, onSale, onEdit, onDelete }) {
                 </TableRow>
               ))
             ) : (
-              <p className="empty-table">No Results</p>
+              <TableRow>
+                <TableCell
+                  rowSpan={4}
+                  className="empty-table"
+                  style={{
+                    color: 'white',
+                    borderBottom: 'none',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  No Results
+                </TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>
@@ -209,8 +266,8 @@ export default function DataTable({ headers, data, onSale, onEdit, onDelete }) {
           '.MuiTablePagination-toolbar': { color: 'white' },
         }}
       />
-
-      <Dialog className="editModal" open={!!editRow} onClose={handleCancel}>
+      {/* TODO: make separate components for dialogs */}
+      <Dialog aria-modal className="modal" open={!!editRow} onClose={handleCancel}>
         <DialogTitle
           style={{
             color: 'white',
@@ -252,10 +309,63 @@ export default function DataTable({ headers, data, onSale, onEdit, onDelete }) {
             backgroundColor: '#465362',
           }}
         >
-          <Button className="cancel-edit" onClick={handleCancel}>
+          <Button className="cancel" onClick={handleCancel}>
             Cancel
           </Button>
-          <Button className="save-edit" onClick={handleSave}>
+          <Button className="save" onClick={handleSave}>
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog aria-modal className="modal" open={!!addRow} onClose={handleCancel}>
+        <DialogTitle
+          style={{
+            color: 'white',
+            backgroundColor: '#465362',
+          }}
+        >
+          Add new vehicle
+        </DialogTitle>
+
+        <DialogContent
+          style={{
+            color: 'white',
+            backgroundColor: '#465362',
+          }}
+        >
+          {headers.map(
+            (header) =>
+              header.key !== 'id' && (
+                <TextField
+                  key={header.key}
+                  label={header.label}
+                  fullWidth
+                  margin="dense"
+                  slotProps={{
+                    inputLabel: { style: { color: 'white' } },
+                    htmlInput: { style: { color: 'white' } },
+                  }}
+                  value={addRow?.[header.key] || ''}
+                  onChange={(e) =>
+                    setAddRow((prev) =>
+                      prev ? { ...prev, [header.key]: e.target.value } : null
+                    )
+                  }
+                />
+              )
+          )}
+        </DialogContent>
+
+        <DialogActions
+          style={{
+            color: 'white',
+            backgroundColor: '#465362',
+          }}
+        >
+          <Button className="cancel" onClick={handleCancelAdd}>
+            Cancel
+          </Button>
+          <Button className="save" onClick={handleSaveAdd}>
             Save
           </Button>
         </DialogActions>
