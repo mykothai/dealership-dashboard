@@ -8,7 +8,6 @@ import {
   TableRow,
   IconButton,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
   Button,
@@ -17,8 +16,9 @@ import {
 } from '@mui/material'
 import { SalesData } from '@components/Sales/SaleDashboard'
 import { MdDeleteForever } from 'react-icons/md'
-import './DataTable.css'
 import { formatCurrency, getComparator } from '../../helpers'
+import { styled } from '@mui/material/styles'
+import './DataTable.css'
 
 interface SalesTableProps {
   data: SalesData[]
@@ -69,7 +69,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>
+              <StyledTableHeaderCell>
                 <TableSortLabel
                   active={sortColumn === 'date'}
                   direction={sortColumn === 'date' ? sortDirection : 'asc'}
@@ -77,8 +77,8 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                 >
                   Date
                 </TableSortLabel>
-              </TableCell>
-              <TableCell>
+              </StyledTableHeaderCell>
+              <StyledTableHeaderCell>
                 <TableSortLabel
                   active={sortColumn === 'vehicle.make'}
                   direction={
@@ -88,8 +88,8 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                 >
                   Vehicle
                 </TableSortLabel>
-              </TableCell>
-              <TableCell>
+              </StyledTableHeaderCell>
+              <StyledTableHeaderCell>
                 <TableSortLabel
                   active={sortColumn === 'selling_price'}
                   direction={
@@ -99,8 +99,8 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                 >
                   Selling Price
                 </TableSortLabel>
-              </TableCell>
-              <TableCell>
+              </StyledTableHeaderCell>
+              <StyledTableHeaderCell>
                 <TableSortLabel
                   active={sortColumn === 'profit'}
                   direction={sortColumn === 'profit' ? sortDirection : 'asc'}
@@ -108,8 +108,8 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                 >
                   Profit
                 </TableSortLabel>
-              </TableCell>
-              <TableCell>
+              </StyledTableHeaderCell>
+              <StyledTableHeaderCell>
                 <TableSortLabel
                   active={sortColumn === 'sales_rep.first_name'}
                   direction={
@@ -121,36 +121,56 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                 >
                   Sales Rep
                 </TableSortLabel>
-              </TableCell>
-              <TableCell>Actions</TableCell>
+              </StyledTableHeaderCell>
+              <StyledTableHeaderCell>Delete</StyledTableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedData.map((row) => (
-              <TableRow
-                key={row.id}
-                onClick={() => handleRowClick(row)}
-                style={{ cursor: 'pointer' }}
-              >
-                <TableCell>{new Date(row.date).toLocaleDateString()}</TableCell>
-                <TableCell>{`${row.vehicle.year} ${row.vehicle.make} ${row.vehicle.model}`}</TableCell>
-                <TableCell>{`${formatCurrency(row.selling_price)}`}</TableCell>
-                <TableCell>{`${formatCurrency(
-                  row.selling_price - row.vehicle.price
-                )}`}</TableCell>
-                <TableCell>{`${row.sales_rep.first_name} ${row.sales_rep.last_name}`}</TableCell>
-                <TableCell>
-                  <IconButton
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      onDelete(row.id)
-                    }}
-                  >
-                    <MdDeleteForever className="action-icon" />
-                  </IconButton>
+            {paginatedData.length ? (
+              paginatedData.map((row) => (
+                <StyledTableRow
+                  key={row.id}
+                  onClick={() => handleRowClick(row)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <StyledTableCell>
+                    {new Date(row.date).toLocaleDateString()}
+                  </StyledTableCell>
+                  <StyledTableCell>{`${row.vehicle.year} ${row.vehicle.make} ${row.vehicle.model}`}</StyledTableCell>
+                  <StyledTableCell>{`${formatCurrency(
+                    row.selling_price
+                  )}`}</StyledTableCell>
+                  <StyledTableCell>{`${formatCurrency(
+                    row.selling_price - row.vehicle.price
+                  )}`}</StyledTableCell>
+                  <StyledTableCell>{`${row.sales_rep.first_name} ${row.sales_rep.last_name}`}</StyledTableCell>
+                  <StyledTableCell>
+                    <IconButton
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        onDelete(row.id)
+                      }}
+                    >
+                      <MdDeleteForever className="action-icon" />
+                    </IconButton>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  rowSpan={4}
+                  className="empty-table"
+                  style={{
+                    color: 'white',
+                    borderBottom: 'none',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  No Results
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -175,10 +195,11 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
         aria-modal
         open={!!selectedRow}
         onClose={handleCloseDetails}
-        slotProps={{ paper: { style: { padding: '16px', maxWidth: '500px' } } }}
+        slotProps={{ paper: { style: { maxWidth: '500px' } } }}
+        className="modal"
       >
-        <DialogTitle>Sale Details</DialogTitle>
-        <DialogContent>
+        <StyledDialogTitle>Sale Details</StyledDialogTitle>
+        <StyledDialogContent>
           {selectedRow && (
             <div>
               <p>
@@ -216,11 +237,62 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
               </p>
             </div>
           )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDetails}>Close</Button>
-        </DialogActions>
+        </StyledDialogContent>
+        <StyledDialogActions>
+          <StyledButton className="close" onClick={handleCloseDetails}>
+            Close
+          </StyledButton>
+        </StyledDialogActions>
       </Dialog>
     </div>
   )
 }
+
+const StyledTableRow = styled(TableRow)(() => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: '#465362',
+  },
+  '&:nth-of-type(even)': {
+    backgroundColor: '#6B747F',
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+  '&:hover': {
+    backgroundColor: '#011936 !important',
+  },
+}))
+
+const StyledTableCell = styled(TableCell)(() => ({
+  color: 'white',
+  borderBottom: 'none',
+}))
+
+const StyledTableHeaderCell = styled(TableCell)(() => ({
+  backgroundColor: '#ed254e',
+  fontWeight: 'bold',
+  borderBottom: 'none',
+  color: 'white',
+}))
+
+const StyledDialogTitle = styled(DialogTitle)(() => ({
+  color: 'white',
+  backgroundColor: '#465362',
+}))
+
+const StyledDialogContent = styled(DialogContent)(() => ({
+  color: 'white',
+  backgroundColor: '#465362',
+}))
+
+const StyledDialogActions = styled(DialogContent)(() => ({
+  color: 'white',
+  backgroundColor: '#465362',
+}))
+
+const StyledButton = styled(Button)(() => ({
+  color: 'white',
+  backgroundColor: '#ed254e',
+  cursor: 'pointer',
+}))
