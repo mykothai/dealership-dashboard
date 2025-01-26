@@ -59,6 +59,7 @@ export default function SellingDialog({ open, saleData, onCancel, onSave }) {
           }}
           value={formData.vehicle}
           onChange={(e) => handleChange('vehicle', e.target.value)}
+          disabled
         />
         <TextField
           label="Selling Price"

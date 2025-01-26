@@ -73,6 +73,7 @@ export default function DataTable({
 
   const filteredData = useMemo(() => {
     if (!searchParams) return sortedData
+
     return sortedData.filter((row) =>
       headers.some((header: { key: string | number }) =>
         row[header.key]
@@ -141,7 +142,7 @@ export default function DataTable({
   const handleSell = (row: Record<string, any>) => {
     setSaleRow({
       user: '',
-      vehicle: '',
+      vehicle: row.id,
       selling_price: '',
       date: '',
     })
@@ -253,7 +254,7 @@ export default function DataTable({
                   ))}
                   {onSale && (
                     <TableCell style={{ borderBottom: 'none' }}>
-                      {row['status'] === VehicleStatus.IN_STOCK && (
+                      {row['status'] !== VehicleStatus.SOLD && (
                         <IconButton onClick={() => handleSell(row)}>
                           <MdAttachMoney className="action-icon" />
                         </IconButton>

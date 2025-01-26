@@ -1,4 +1,4 @@
-import { VehicleStatus } from '../../constants'
+import { VehicleCondition } from '../../constants'
 import { useState, useEffect } from 'react'
 import {
   createVehicle,
@@ -17,7 +17,7 @@ export interface Vehicle {
   year: number
   price: number
   vin: string
-  condition: VehicleStatus
+  condition: VehicleCondition
   mileage: number
   status: string
   photo_url: string

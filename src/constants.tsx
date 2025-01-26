@@ -1,4 +1,4 @@
-export enum VehicleStatus {
+export enum VehicleCondition {
   NEW = 'NEW',
   USED = 'USED',
 }
