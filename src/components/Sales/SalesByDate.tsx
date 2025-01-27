@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import {
   XAxis,
   YAxis,
@@ -14,22 +13,11 @@ interface SalesByDateChartProps {
 }
 
 export default function SalesByDateChart({ salesData }: SalesByDateChartProps) {
-  const [salesByDate, setSalesByDate] = useState([])
-
-  useEffect(() => {
-    generateSalesByDate(salesData)
-  }, [])
-
-  // Aggregate sales by date
-  function generateSalesByDate(salesData) {
-    const data = salesData.reduce((acc, sale) => {
-      const date = new Date(sale.date).toLocaleDateString()
-      acc[date] = (acc[date] || 0) + 1
-      return acc
-    }, {} as Record<string, number>)
-
-    setSalesByDate(data)
-  }
+  const salesByDate = salesData.reduce((acc, sale) => {
+    const date = new Date(sale.date).toLocaleDateString()
+    acc[date] = (acc[date] || 0) + 1
+    return acc
+  }, {} as Record<string, number>)
 
   // format data into proper object
   const formattedData = Object.entries(salesByDate).map(([date, count]) => ({
