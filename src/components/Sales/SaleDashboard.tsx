@@ -4,6 +4,11 @@ import { UserRole } from '../../constants'
 import SalesTable from '@components/Table/SalesTable'
 import SalesByDateChart from './SalesByDate'
 import SalesAggregate from './SalesAggregate'
+import SalesByCarYear from './SalesByCarAge'
+import SalesByCondition from './SalesByCondition'
+import SalesByMake from './SalesByMake'
+import SalesByMilage from './SalesByMileage'
+import SalesByPrice from './SalesByPrice'
 
 export interface Sale {
   user: number
@@ -97,11 +102,11 @@ export default function SaleDashboard({ session }) {
             }}
           >
             <SalesByDateChart salesData={sales} />
-            <SalesByDateChart salesData={sales} />
-            <SalesByDateChart salesData={sales} />
-            <SalesByDateChart salesData={sales} />
-            <SalesByDateChart salesData={sales} />
-            <SalesByDateChart salesData={sales} />
+            <SalesByCarYear salesData={sales} />
+            <SalesByCondition salesData={sales} />
+            <SalesByMilage salesData={sales} />
+            <SalesByPrice salesData={sales} />
+            <SalesByMake salesData={sales} />
           </div>
         </div>
 
