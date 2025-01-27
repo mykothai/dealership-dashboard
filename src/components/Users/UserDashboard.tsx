@@ -2,6 +2,7 @@ import DataTable from '@components/Table/DataTable'
 import { UserRole } from '../../constants'
 import { getAllUsers, updateUserById } from '../../api/UserApi'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 export interface User {
   id: number
@@ -33,6 +34,7 @@ export default function UserDashboard() {
       const vehicles = (await getAllUsers().then((res) => res.data)) || []
       setUsers(vehicles)
     } catch (error) {
+      toast.error(`Failed to retrieve users. Please refresh the page.`)
       console.error('Failed to retrieve users.', error)
     }
   }
@@ -49,11 +51,14 @@ export default function UserDashboard() {
 
       const response = await updateUserById(parseInt(row.id), payload)
       if (response.status === 202) {
+        toast.success('User updated successfully!')
         getUsers()
       } else {
         throw new Error(response.status.toString())
       }
     } catch (error) {
+      toast.error(`Failed to update user ${row.id}. Please try again.`)
+
       console.error('Failed to update user.', error)
     }
   }

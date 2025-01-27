@@ -10,6 +10,7 @@ import SalesByMake from './SalesByMake'
 import SalesByMilage from './SalesByMileage'
 import SalesByPrice from './SalesByPrice'
 import { User } from '@components/Users/UserDashboard'
+import { toast } from 'react-toastify'
 
 export interface Sale {
   user: number
@@ -69,6 +70,7 @@ export default function SaleDashboard() {
       }
       setSales(sales)
     } catch (error) {
+      toast.error(`Failed to retrieve sales. Please refresh the page.`)
       console.error('Failed to retrieve sales.', error)
     }
   }
@@ -79,12 +81,16 @@ export default function SaleDashboard() {
         const response = await deleteSale(id)
 
         if (response.status === 200) {
+          toast.success('Sale deleted successfully!')
+
           getSales()
         } else {
           throw new Error(response.status.toString())
         }
       }
     } catch (error) {
+      console.error(`Failed to delete sale ${id}`, error)
+
       console.error(`Failed to delete sale ${id}`, error)
     }
   }

@@ -272,9 +272,11 @@ export default function DataTable({
 
                   {onDelete && (
                     <TableCell style={{ borderBottom: 'none' }}>
-                      <IconButton onClick={() => onDelete(row)}>
-                        <MdDeleteForever className="action-icon" />
-                      </IconButton>
+                      {row['status'] !== VehicleStatus.SOLD && (
+                        <IconButton onClick={() => onDelete(row)}>
+                          <MdDeleteForever className="action-icon" />
+                        </IconButton>
+                      )}
                     </TableCell>
                   )}
                 </StyledTableRow>

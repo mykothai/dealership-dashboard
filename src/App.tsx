@@ -7,6 +7,8 @@ import UserDashboard, { User } from '@components/Users/UserDashboard'
 import SidebarMenu from '@components/Menu/SideMenu'
 import SaleDashboard from '@components/Sales/SaleDashboard'
 import VehicleDashboard from '@components/Vehicles/VehicleDashboard'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   // use user's email validated against existing users as a 'token'
@@ -53,6 +55,7 @@ function App() {
 
   return (
     <div className="flex">
+      <ToastContainer position="top-center" autoClose={2000} />
       <Router>
         {isLoggedIn && <SidebarMenu handleLogout={handleLogout} />}
         <Routes>

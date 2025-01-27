@@ -9,6 +9,7 @@ import {
 import DataTable from '@components/Table/DataTable'
 import { Sale } from '@components/Sales/SaleDashboard'
 import { sellVehicle } from '../../api/SalesApi'
+import { toast } from 'react-toastify'
 
 export interface Vehicle {
   id: number
@@ -48,6 +49,7 @@ export default function VehicleDashboard() {
       const vehicles = (await getAllVehicles().then((res) => res.data)) || []
       setVehicles(vehicles)
     } catch (error) {
+      toast.error(`Failed to retrieve vehicles. Please refresh the page.`)
       console.error('Failed to retrieve vehicles.', error)
     }
   }
@@ -69,11 +71,13 @@ export default function VehicleDashboard() {
       const response = await createVehicle(payload)
 
       if (response.status === 201) {
+        toast.success('Vehicle created successfully!')
         getVehicles()
       } else {
         throw new Error(response.status.toString())
       }
     } catch (error) {
+      toast.error(`Failed to create new vehicle. Please try again.`)
       console.error('Failed to create vehicle.', error)
     }
   }
@@ -89,16 +93,18 @@ export default function VehicleDashboard() {
 
       const response = await sellVehicle(payload)
       if (response.status === 200) {
+        toast.success('Vehicle sold successfully!')
         getVehicles()
       } else {
         throw new Error(response.status.toString())
       }
     } catch (error) {
+      toast.error(`Failed to sell vehicle. Please try again.`)
       console.error('Failed to sell vehicle.', error)
     }
   }
 
-  async function handleEdit(row: Record<string, any>) {
+  async function handleEdit(row: Vehicle) {
     try {
       const payload: Partial<Vehicle> = {
         make: row.make,
@@ -112,29 +118,33 @@ export default function VehicleDashboard() {
         photo_url: row.photo_url,
       }
 
-      const response = await updateVehicle(parseInt(row.id), payload)
+      const response = await updateVehicle(row.id, payload)
       if (response.status === 202) {
+        toast.success('Vehicle updated successfully!')
         getVehicles()
       } else {
         throw new Error(response.status.toString())
       }
     } catch (error) {
+      toast.error(`Failed to update vehicle ${row.id}. Please try again.`)
       console.error('Failed to update vehicle.', error)
     }
   }
 
-  async function handleDelete(row: Record<string, any>) {
+  async function handleDelete(row: Vehicle) {
     try {
       if (window.confirm('Are you sure you want to delete this vehicle?')) {
-        const response = await deleteVehicle(parseInt(row.id))
+        const response = await deleteVehicle(row.id)
 
         if (response.status === 201) {
+          toast.success('Vehicle deleted successfully!')
           getVehicles()
         } else {
           throw new Error(response.status.toString())
         }
       }
     } catch (error) {
+      toast.error(`Failed to delete vehicle ${row.id}. Please try again.`)
       console.error(`Failed to delete vehicle ${row.id}`, error)
     }
   }
