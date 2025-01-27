@@ -6,8 +6,8 @@ import {
   BarChart,
   Bar,
 } from 'recharts'
-import { SalesData } from './SaleDashboard'
 import { useMemo } from 'react'
+import { SalesData } from '@components/Dashboards/Sales'
 
 interface Props {
   salesData: SalesData[]

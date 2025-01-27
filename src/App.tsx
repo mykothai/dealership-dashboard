@@ -3,12 +3,12 @@ import NotFoundPage from '@components/NotFoundPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getAllUsers } from './api/UserApi'
-import UserDashboard, { User } from '@components/Users/UserDashboard'
-import SidebarMenu from '@components/Menu/SideMenu'
-import SaleDashboard from '@components/Sales/SaleDashboard'
-import VehicleDashboard from '@components/Vehicles/VehicleDashboard'
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import SaleDashboard from '@components/Dashboards/Sales'
+import UserDashboard, { User } from '@components/Dashboards/Users'
+import VehicleDashboard from '@components/Dashboards/Vehicles'
+import SidebarMenu from '@components/Menu/SideMenu'
 
 function App() {
   // use user's email validated against existing users as a 'token'
@@ -30,7 +30,7 @@ function App() {
       const currentUser = users.filter((user: User) => user.email === email)[0]
 
       if (!currentUser) {
-        alert('Unable to log in')
+        toast.error('Unable to log in. Please check your credentials.')
         return
       }
 

@@ -20,6 +20,19 @@ export default defineConfig({
         find: '@components',
         replacement: path.resolve(__dirname, './src/components'),
       },
+      {
+        find: '@api',
+        replacement: path.resolve(__dirname, './src/api'),
+      },
+      {
+        find: '@constants',
+        replacement: path.resolve(__dirname, './src/constants.ts'),
+      },
+
+      {
+        find: '@helpers',
+        replacement: path.resolve(__dirname, './src/helpers.ts'),
+      },
     ],
   },
 })

@@ -3,30 +3,33 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  Line,
-  LineChart,
+  Bar,
+  BarChart,
 } from 'recharts'
-import { SalesData } from './SaleDashboard'
 import { useMemo } from 'react'
+import { SalesData } from '@components/Dashboards/Sales'
 
-interface SalesByDateChartProps {
+interface Props {
   salesData: SalesData[]
 }
 
-export default function SalesByDateChart({ salesData }: SalesByDateChartProps) {
+export default function SalesByMileage({ salesData }: Props) {
   const salesByMetric = useMemo(() => {
     return salesData.reduce((acc, sale) => {
-      const date = new Date(sale.date).toLocaleDateString()
-      acc[date] = (acc[date] || 0) + 1
+      const mileageRange = Math.floor(sale.vehicle.mileage / 10000) * 10
+      const rangeLabel = `${mileageRange}-${mileageRange + 9}k`
+      acc[rangeLabel] = (acc[rangeLabel] || 0) + 1
       return acc
     }, {} as Record<string, number>)
   }, [salesData])
 
   // format data into proper object
-  const formattedData = Object.entries(salesByMetric).map(([date, count]) => ({
-    date,
-    count,
-  }))
+  const formattedData = Object.entries(salesByMetric).map(
+    ([milage, count]) => ({
+      milage,
+      count,
+    })
+  )
 
   return (
     <div
@@ -38,26 +41,17 @@ export default function SalesByDateChart({ salesData }: SalesByDateChartProps) {
         overflowY: 'hidden',
       }}
     >
-      <p>Sales by Date</p>
+      <p>Sales by Mileage</p>
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          data={
-            formattedData.length
-              ? formattedData
-              : [{ date: new Date(), count: 0 }]
-          }
+        <BarChart
+          data={formattedData}
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >
-          <XAxis dataKey="date" stroke="#fff" />
+          <XAxis dataKey="milage" stroke="#fff" />
           <YAxis dataKey="count" stroke="#fff" allowDecimals={false} />
           <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="count"
-            stroke="#8884d8"
-            strokeWidth={2}
-          />
-        </LineChart>
+          <Bar dataKey="count" fill="#8dd1e1" />
+        </BarChart>
       </ResponsiveContainer>
     </div>
   )

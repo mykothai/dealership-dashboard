@@ -16,7 +16,7 @@ import {
 } from '@mui/material'
 import { SalesData } from '@components/Sales/SaleDashboard'
 import { MdDeleteForever } from 'react-icons/md'
-import { formatCurrency, getComparator } from '../../helpers'
+import { formatCurrency, getComparator } from '@helpers'
 import { styled } from '@mui/material/styles'
 import './DataTable.css'
 

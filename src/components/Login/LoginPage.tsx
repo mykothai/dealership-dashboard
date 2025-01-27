@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './LoginPage.css'
 import { MdOutlineEmail } from 'react-icons/md'
 import { Navigate } from 'react-router-dom'
-import { UserRole } from '../../constants'
+import { UserRole } from '@constants'
 
 export default function LoginPage({ getUsers, isLoggedIn }) {
   const [email, setEmail] = useState('')

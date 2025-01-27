@@ -6,14 +6,14 @@ import {
   Bar,
   BarChart,
 } from 'recharts'
-import { SalesData } from './SaleDashboard'
 import { useMemo } from 'react'
+import { SalesData } from '@components/Dashboards/Sales'
 
 interface Props {
   salesData: SalesData[]
 }
 
-export default function SalesByDateChart({ salesData }: Props) {
+export default function SalesByPrice({ salesData }: Props) {
   const salesByMetric = useMemo(() => {
     return salesData.reduce((acc, sale) => {
       const priceRange = Math.floor(sale.vehicle.price / 10000) * 10

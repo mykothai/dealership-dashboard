@@ -24,7 +24,10 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@api/*": ["api/*"],
+      "@constants": ["constants.ts"],
+      "@helpers": ["helpers.ts"]
     }
   },
   "include": ["src"]

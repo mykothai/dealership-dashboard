@@ -1,9 +1,9 @@
 import { Card, CardContent, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { SalesData } from './SaleDashboard'
-import { User } from '@components/Users/UserDashboard'
-import { formatCurrency } from '../../helpers'
+import { User } from '@components/Dashboards/Users'
+import { formatCurrency } from '@helpers'
 import { useMemo } from 'react'
+import { SalesData } from '@components/Dashboards/Sales'
 
 interface SalesAggregateChartProps {
   data: SalesData[]

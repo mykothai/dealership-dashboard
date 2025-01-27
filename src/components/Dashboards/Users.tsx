@@ -1,8 +1,8 @@
-import DataTable from '@components/Table/DataTable'
-import { UserRole } from '../../constants'
-import { getAllUsers, updateUserById } from '../../api/UserApi'
+import DataTable from '@components/Tables/DataTable'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { getAllUsers, updateUserById } from '@api/UserApi'
+import { UserRole } from '@constants'
 
 export interface User {
   id: number
@@ -34,7 +34,7 @@ export default function UserDashboard() {
       const vehicles = (await getAllUsers().then((res) => res.data)) || []
       setUsers(vehicles)
     } catch (error) {
-      toast.error(`Failed to retrieve users. Please refresh the page.`)
+      toast.error('Failed to retrieve users. Please refresh the page.')
       console.error('Failed to retrieve users.', error)
     }
   }

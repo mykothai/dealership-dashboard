@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import './SideMenu.css'
 import { useEffect, useState } from 'react'
-import { User } from '@components/Users/UserDashboard'
+import { User } from '@components/Dashboards/Users'
 
 export default function SidebarMenu({ handleLogout }) {
   const [session, setSession] = useState<User | null>(null)

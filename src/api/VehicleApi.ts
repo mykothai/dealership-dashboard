@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import instance from './axiosConfig'
-import { Vehicle } from '@components/Vehicles/VehicleDashboard'
+import { Vehicle } from '@components/Dashboards/Vehicles'
 
 export async function getAllVehicles(): Promise<AxiosResponse> {
   try {

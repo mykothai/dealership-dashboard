@@ -1,7 +1,7 @@
 import { Tooltip, ResponsiveContainer, Cell, Pie, PieChart } from 'recharts'
-import { SalesData } from './SaleDashboard'
-import { PIE_CHART_COLORS } from '../../constants'
+import { PIE_CHART_COLORS } from '@constants'
 import { useMemo } from 'react'
+import { SalesData } from '@components/Dashboards/Sales'
 
 interface Props {
   salesData: SalesData[]

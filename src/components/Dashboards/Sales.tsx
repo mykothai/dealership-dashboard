@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
-import { deleteSale, getAllSales } from '../../api/SalesApi'
-import { UserRole } from '../../constants'
-import SalesTable from '@components/Table/SalesTable'
-import SalesByDateChart from './SalesByDate'
-import SalesAggregate from './SalesAggregate'
-import SalesByCarYear from './SalesByCarAge'
-import SalesByCondition from './SalesByCondition'
-import SalesByMake from './SalesByMake'
-import SalesByMilage from './SalesByMileage'
-import SalesByPrice from './SalesByPrice'
-import { User } from '@components/Users/UserDashboard'
+import { deleteSale, getAllSales } from '@api/SalesApi'
+import { UserRole } from '@constants'
+import SalesTable from '@components/Tables/SalesTable'
+
+import { User } from '@components/Dashboards/Users'
 import { toast } from 'react-toastify'
+import SalesAggregate from '@components/SalesAnalytics/SalesAggregate'
+import SalesByCarYear from '@components/SalesAnalytics/SalesByCarAge'
+import SalesByCondition from '@components/SalesAnalytics/SalesByCondition'
+import SalesByDateChart from '@components/SalesAnalytics/SalesByDate'
+import SalesByMake from '@components/SalesAnalytics/SalesByMake'
+import SalesByPrice from '@components/SalesAnalytics/SalesByPrice'
+import SalesByMileage from '@components/SalesAnalytics/SalesByMileage'
 
 export interface Sale {
   user: number
@@ -120,7 +121,7 @@ export default function SaleDashboard() {
             <SalesByDateChart salesData={sales} />
             <SalesByCarYear salesData={sales} />
             <SalesByCondition salesData={sales} />
-            <SalesByMilage salesData={sales} />
+            <SalesByMileage salesData={sales} />
             <SalesByPrice salesData={sales} />
             <SalesByMake salesData={sales} />
           </div>

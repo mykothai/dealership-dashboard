@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import instance from './axiosConfig'
-import { User } from '@components/Users/UserDashboard'
+import { User } from '@components/Dashboards/Users'
 
 export async function getAllUsers(): Promise<AxiosResponse> {
   try {

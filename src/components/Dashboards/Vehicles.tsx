@@ -1,14 +1,14 @@
-import { VehicleCondition } from '../../constants'
+import { VehicleCondition } from '@constants'
 import { useState, useEffect } from 'react'
 import {
   createVehicle,
   deleteVehicle,
   getAllVehicles,
   updateVehicle,
-} from '../../api/VehicleApi'
-import DataTable from '@components/Table/DataTable'
+} from '@api/VehicleApi'
+import DataTable from '@components/Tables/DataTable'
 import { Sale } from '@components/Sales/SaleDashboard'
-import { sellVehicle } from '../../api/SalesApi'
+import { sellVehicle } from '@api/SalesApi'
 import { toast } from 'react-toastify'
 
 export interface Vehicle {
