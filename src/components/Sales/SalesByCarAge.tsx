@@ -7,24 +7,25 @@ import {
   Bar,
 } from 'recharts'
 import { SalesData } from './SaleDashboard'
+import { useMemo } from 'react'
 
 interface Props {
   salesData: SalesData[]
 }
 
 export default function SalesByCarYear({ salesData }: Props) {
-  const salesByMetric = salesData.reduce((acc, sale) => {
-    acc[sale.vehicle.year] = (acc[sale.vehicle.year] || 0) + 1
-    return acc
-  }, {} as Record<number, number>)
+  const salesByMetric = useMemo(() => {
+    return salesData.reduce((acc, sale) => {
+      acc[sale.vehicle.year] = (acc[sale.vehicle.year] || 0) + 1
+      return acc
+    }, {} as Record<number, number>)
+  }, [salesData])
 
   // format data into proper object
   const formattedData = Object.entries(salesByMetric).map(([year, count]) => ({
     year,
     count,
   }))
-
-  console.log(formattedData)
 
   return (
     <div

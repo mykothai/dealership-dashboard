@@ -1,16 +1,19 @@
 import { Tooltip, ResponsiveContainer, Cell, Pie, PieChart } from 'recharts'
 import { SalesData } from './SaleDashboard'
 import { PIE_CHART_COLORS } from '../../constants'
+import { useMemo } from 'react'
 
 interface Props {
   salesData: SalesData[]
 }
 
 export default function SalesByMake({ salesData }: Props) {
-  const salesByMetric = salesData.reduce((acc, sale: SalesData) => {
-    acc[sale.vehicle.make] = (acc[sale.vehicle.make] || 0) + 1
-    return acc
-  }, {} as Record<string, number>)
+  const salesByMetric = useMemo(() => {
+    return salesData.reduce((acc, sale) => {
+      acc[sale.vehicle.make] = (acc[sale.vehicle.make] || 0) + 1
+      return acc
+    }, {} as Record<string, number>)
+  }, [salesData])
 
   // format data into proper object
   const formattedData = Object.entries(salesByMetric).map(([make, count]) => ({

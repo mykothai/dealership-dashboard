@@ -7,18 +7,21 @@ import {
   BarChart,
 } from 'recharts'
 import { SalesData } from './SaleDashboard'
+import { useMemo } from 'react'
 
 interface Props {
   salesData: SalesData[]
 }
 
 export default function SalesByMileage({ salesData }: Props) {
-  const salesByMetric = salesData.reduce((acc, sale) => {
-    const mileageRange = Math.floor(sale.vehicle.mileage / 10000) * 10
-    const rangeLabel = `${mileageRange}-${mileageRange + 9}k`
-    acc[rangeLabel] = (acc[rangeLabel] || 0) + 1
-    return acc
-  }, {} as Record<string, number>)
+  const salesByMetric = useMemo(() => {
+    return salesData.reduce((acc, sale) => {
+      const mileageRange = Math.floor(sale.vehicle.mileage / 10000) * 10
+      const rangeLabel = `${mileageRange}-${mileageRange + 9}k`
+      acc[rangeLabel] = (acc[rangeLabel] || 0) + 1
+      return acc
+    }, {} as Record<string, number>)
+  }, [salesData])
 
   // format data into proper object
   const formattedData = Object.entries(salesByMetric).map(

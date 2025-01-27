@@ -7,20 +7,23 @@ import {
   LineChart,
 } from 'recharts'
 import { SalesData } from './SaleDashboard'
+import { useMemo } from 'react'
 
 interface SalesByDateChartProps {
   salesData: SalesData[]
 }
 
 export default function SalesByDateChart({ salesData }: SalesByDateChartProps) {
-  const salesByDate = salesData.reduce((acc, sale) => {
-    const date = new Date(sale.date).toLocaleDateString()
-    acc[date] = (acc[date] || 0) + 1
-    return acc
-  }, {} as Record<string, number>)
+  const salesByMetric = useMemo(() => {
+    return salesData.reduce((acc, sale) => {
+      const date = new Date(sale.date).toLocaleDateString()
+      acc[date] = (acc[date] || 0) + 1
+      return acc
+    }, {} as Record<string, number>)
+  }, [salesData])
 
   // format data into proper object
-  const formattedData = Object.entries(salesByDate).map(([date, count]) => ({
+  const formattedData = Object.entries(salesByMetric).map(([date, count]) => ({
     date,
     count,
   }))

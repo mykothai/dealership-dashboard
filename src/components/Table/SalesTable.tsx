@@ -32,7 +32,6 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
   const [sortColumn, setSortColumn] = useState<string | null>(null)
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
-  // FIXME: sorting not working on some columns
   const sortedData = useMemo(() => {
     if (!sortColumn) return data
     return [...data].sort(getComparator(sortDirection, sortColumn))

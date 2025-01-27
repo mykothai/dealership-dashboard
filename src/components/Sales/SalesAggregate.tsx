@@ -3,6 +3,7 @@ import { Box } from '@mui/system'
 import { SalesData } from './SaleDashboard'
 import { User } from '@components/Users/UserDashboard'
 import { formatCurrency } from '../../helpers'
+import { useMemo } from 'react'
 
 interface SalesAggregateChartProps {
   data: SalesData[]
@@ -13,10 +14,9 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
   const totalCarsSold = data.length || 0
 
   // Calculate total profits
-  const totalProfits = data.reduce(
-    (total, sale) => total + sale.selling_price,
-    0
-  )
+  const totalProfits = useMemo(() => {
+    return data.reduce((total, sale) => total + sale.selling_price, 0)
+  }, [data])
 
   // Calculate sales rep with the most sales
   const mostSalesRep = getRepWithMostSales(data)
@@ -39,7 +39,7 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
     },
     {
       title: 'Avg. Profit/Car',
-      description: `${formatCurrency(totalProfits/totalCarsSold)}`,
+      description: `${formatCurrency(totalProfits / totalCarsSold)}`,
     },
     {
       title: 'Most Sales',

@@ -19,7 +19,7 @@ export default function LoginPage({ getUsers, session, isLoggedIn }) {
     switch (session.role) {
       case UserRole.PRINCIPAL || UserRole.MANAGER:
         return <Navigate to="/sales" />
-      // return <SaleDashboard session={session} />
+
       case UserRole.ADMIN:
         return <Navigate to="/users" />
 
@@ -42,7 +42,7 @@ export default function LoginPage({ getUsers, session, isLoggedIn }) {
               type="text"
               placeholder="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value.trim())}
               required
             />
           </div>
