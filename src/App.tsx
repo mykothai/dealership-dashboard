@@ -1,7 +1,7 @@
 import LoginPage from '@components/Login/LoginPage'
 import NotFoundPage from '@components/NotFoundPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { getAllUsers } from './api/UserApi'
 import UserDashboard, { User } from '@components/Users/UserDashboard'
 import SidebarMenu from '@components/Menu/SideMenu'

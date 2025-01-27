@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { deleteSale, getAllSales } from '../../api/SalesApi'
 import { UserRole } from '../../constants'
 import SalesTable from '@components/Table/SalesTable'
+import SalesByDateChart from './SalesByDate'
 
 export interface Sale {
   user: number
@@ -75,7 +76,55 @@ export default function SaleDashboard({ session }) {
 
   return (
     <>
-      <SalesTable data={sales} onDelete={handleDelete} />
+      <div
+        style={{
+          marginLeft: '200px',
+          top: ' 0',
+          bottom: ' 0',
+          left: ' 0',
+          position: 'fixed',
+        }}
+      >
+        <div>
+          <h1 style={{ justifyContent: 'left', margin: '10px 20px' }}>
+            Summary
+          </h1>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+            }}
+          >
+            <SalesByDateChart salesData={sales} />
+            <SalesByDateChart salesData={sales} />
+            <SalesByDateChart salesData={sales} />
+            <SalesByDateChart salesData={sales} />
+            <SalesByDateChart salesData={sales} />
+            <SalesByDateChart salesData={sales} />
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(1, 2fr)',
+            marginTop: '20px',
+            maxHeight: '50%',
+          }}
+        >
+          <h1 style={{ justifyContent: 'left', margin: '10px 20px' }}>
+            All Sales
+          </h1>
+          <div
+            style={{
+              overflowX: 'hidden',
+              overflowY: 'scroll',
+            }}
+          >
+            <SalesTable data={sales} onDelete={handleDelete} />
+          </div>
+        </div>
+      </div>
     </>
   )
 }

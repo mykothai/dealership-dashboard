@@ -32,6 +32,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
   const [sortColumn, setSortColumn] = useState<string | null>(null)
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
+  // FIXME: sorting not working on some columns
   const sortedData = useMemo(() => {
     if (!sortColumn) return data
     return [...data].sort(getComparator(sortDirection, sortColumn))
@@ -64,7 +65,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
   }
 
   return (
-    <div className="table-wrapper">
+    <div>
       <TableContainer>
         <Table size="small">
           <TableHead>
@@ -188,6 +189,11 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
           '.MuiTablePagination-selectIcon': { color: 'white' },
           '.MuiTablePagination-actions > button': { color: 'white' },
           '.MuiTablePagination-toolbar': { color: 'white' },
+          position: 'sticky',
+          left: 0,
+          bottom: 0,
+          zIndex: 2,
+          backgroundColor: '#465362',
         }}
       />
 
@@ -274,6 +280,9 @@ const StyledTableHeaderCell = styled(TableCell)(() => ({
   fontWeight: 'bold',
   borderBottom: 'none',
   color: 'white',
+  position: 'sticky',
+  top: 0,
+  zIndex: 1,
 }))
 
 const StyledDialogTitle = styled(DialogTitle)(() => ({
