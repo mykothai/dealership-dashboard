@@ -1,7 +1,7 @@
 import LoginPage from '@components/Login/LoginPage'
 import NotFoundPage from '@components/NotFoundPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Suspense, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getAllUsers } from './api/UserApi'
 import UserDashboard, { User } from '@components/Users/UserDashboard'
 import SidebarMenu from '@components/Menu/SideMenu'
@@ -10,8 +10,16 @@ import VehicleDashboard from '@components/Vehicles/VehicleDashboard'
 
 function App() {
   // use user's email validated against existing users as a 'token'
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useState<User | null>(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    const savedSession = localStorage.getItem('session')
+    if (savedSession) {
+      setSession(JSON.parse(savedSession))
+      setIsLoggedIn(true)
+    }
+  }, [])
 
   async function getUsers(email: string) {
     // call data base to get user by email
@@ -24,35 +32,37 @@ function App() {
         return
       }
 
+      const savedSession = localStorage.getItem('session')
+      if (savedSession) {
+        setSession(JSON.parse(savedSession))
+      } else {
+        localStorage.setItem('session', JSON.stringify(currentUser))
+      }
+
       setIsLoggedIn(true)
-      setSession(currentUser) /* TODO: save session in local storage */
     } catch (error) {
       console.error('Failed to retrieve user.', error)
     }
   }
 
+  function handleLogout() {
+    localStorage.removeItem('session')
+    setSession(null)
+    setIsLoggedIn(false)
+  }
+
   return (
     <div className="flex">
       <Router>
-        {session && <SidebarMenu session={session} />}
+        {isLoggedIn && <SidebarMenu handleLogout={handleLogout} />}
         <Routes>
-          {/* TODO: protected routes */}
           <Route
             path=""
-            element={
-              <LoginPage
-                getUsers={getUsers}
-                session={session}
-                isLoggedIn={isLoggedIn}
-              />
-            }
+            element={<LoginPage getUsers={getUsers} isLoggedIn={isLoggedIn} />}
           />
-          <Route path="/sales" element={<SaleDashboard session={session} />} />
-          <Route path="/users" element={<UserDashboard session={session} />} />
-          <Route
-            path="/vehicles"
-            element={<VehicleDashboard session={session} />}
-          />
+          <Route path="/sales" element={<SaleDashboard />} />
+          <Route path="/users" element={<UserDashboard />} />
+          <Route path="/vehicles" element={<VehicleDashboard />} />
 
           <Route path="/404" element={<NotFoundPage />} />
         </Routes>

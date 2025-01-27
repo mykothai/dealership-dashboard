@@ -311,7 +311,6 @@ export default function DataTable({
           '.MuiTablePagination-toolbar': { color: 'white' },
         }}
       />
-      {/* TODO: make separate components for dialogs */}
       <Dialog
         aria-modal
         className="modal"

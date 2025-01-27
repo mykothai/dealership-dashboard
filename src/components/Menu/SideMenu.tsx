@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import './SideMenu.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { User } from '@components/Users/UserDashboard'
 
-export default function SidebarMenu({ session }) {
+export default function SidebarMenu({ handleLogout }) {
+  const [session, setSession] = useState<User | null>(null)
   const [activePath, setActivePath] = useState<string>('')
   const navigate = useNavigate()
 
@@ -10,6 +12,13 @@ export default function SidebarMenu({ session }) {
     label: string
     path: string
   }
+
+  useEffect(() => {
+    const savedSession = localStorage.getItem('session')
+    if (savedSession) {
+      setSession(JSON.parse(savedSession))
+    }
+  }, [])
 
   // Define the menu options based on the role
   const menuOptions: { [key: string]: MenuOption[] } = {
@@ -31,11 +40,16 @@ export default function SidebarMenu({ session }) {
       { label: 'Vehicle Dashboard', path: '/vehicles' },
     ],
   }
-  const availableOptions = menuOptions[session.role] || []
+
+  const availableOptions = session ? menuOptions[session.role] : []
 
   function handleNavigation(path: string) {
     setActivePath(path)
     navigate(path)
+  }
+
+  function onLogout() {
+    handleLogout()
   }
 
   return (
@@ -51,6 +65,17 @@ export default function SidebarMenu({ session }) {
               {option.label}
             </button>
           ))}
+          <div>
+            <button
+              className="logout"
+              onClick={() => {
+                onLogout()
+                navigate('/')
+              }}
+            >
+              Logout
+            </button>
+          </div>
         </nav>
       </div>
     </>

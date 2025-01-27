@@ -23,7 +23,7 @@ export interface Vehicle {
   photo_url: string
 }
 
-export default function VehicleDashboard({ session }) {
+export default function VehicleDashboard() {
   const [vehicles, setVehicles] = useState([])
 
   const headers = [

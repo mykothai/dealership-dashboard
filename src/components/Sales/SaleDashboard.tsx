@@ -9,6 +9,7 @@ import SalesByCondition from './SalesByCondition'
 import SalesByMake from './SalesByMake'
 import SalesByMilage from './SalesByMileage'
 import SalesByPrice from './SalesByPrice'
+import { User } from '@components/Users/UserDashboard'
 
 export interface Sale {
   user: number
@@ -43,18 +44,27 @@ export interface SalesData {
   date: string
 }
 
-export default function SaleDashboard({ session }) {
+export default function SaleDashboard() {
+  const [session, setSession] = useState<User | null>(null)
   const [sales, setSales] = useState([])
 
   useEffect(() => {
+    getSession()
     getSales()
   }, [])
+
+  function getSession() {
+    const savedSession = localStorage.getItem('session')
+    if (savedSession) {
+      setSession(JSON.parse(savedSession))
+    }
+  }
 
   async function getSales() {
     try {
       const sales = (await getAllSales().then((res) => res.data)) || []
       // if the user is a sales-rep they are only allowed to see their own sales
-      if (session.role === UserRole.SALES_REP) {
+      if (session && session.role === UserRole.SALES_REP) {
         sales.filter((sale: SalesData) => sale.sales_rep.id === session.id)
       }
       setSales(sales)

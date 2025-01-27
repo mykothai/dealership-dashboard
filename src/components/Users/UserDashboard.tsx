@@ -12,7 +12,7 @@ export interface User {
   profile_picture_url: string
 }
 
-export default function UserDashboard({ session }) {
+export default function UserDashboard() {
   const [users, setUsers] = useState([])
 
   const headers = [

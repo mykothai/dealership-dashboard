@@ -4,8 +4,14 @@ import { MdOutlineEmail } from 'react-icons/md'
 import { Navigate } from 'react-router-dom'
 import { UserRole } from '../../constants'
 
-export default function LoginPage({ getUsers, session, isLoggedIn }) {
+export default function LoginPage({ getUsers, isLoggedIn }) {
   const [email, setEmail] = useState('')
+
+  let session = null
+  const savedSession = localStorage.getItem('session')
+  if (savedSession) {
+    session = JSON.parse(savedSession)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -15,7 +21,7 @@ export default function LoginPage({ getUsers, session, isLoggedIn }) {
     setEmail('')
   }
 
-  if (isLoggedIn) {
+  if (isLoggedIn && session) {
     switch (session.role) {
       case UserRole.PRINCIPAL || UserRole.MANAGER:
         return <Navigate to="/sales" />
@@ -48,12 +54,6 @@ export default function LoginPage({ getUsers, session, isLoggedIn }) {
           </div>
 
           <button type="submit">Login</button>
-
-          <div className="register">
-            <p>
-              Don't have an account? <a href="#">Contact your administrator</a>
-            </p>
-          </div>
         </form>
       </div>
     </>

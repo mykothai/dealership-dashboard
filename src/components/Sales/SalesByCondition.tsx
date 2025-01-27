@@ -8,12 +8,12 @@ interface Props {
 }
 
 export default function SalesByCondition({ salesData }: Props) {
-    const salesByMetric = useMemo(() => {
-      return salesData.reduce((acc, sale) => {
-        acc[sale.vehicle.condition] = (acc[sale.vehicle.condition] || 0) + 1
-        return acc
-      }, {} as Record<string, number>)
-    }, [salesData])
+  const salesByMetric = useMemo(() => {
+    return salesData.reduce((acc, sale) => {
+      acc[sale.vehicle.condition] = (acc[sale.vehicle.condition] || 0) + 1
+      return acc
+    }, {} as Record<string, number>)
+  }, [salesData])
 
   // format data into proper object
   const formattedData = Object.entries(salesByMetric).map(
