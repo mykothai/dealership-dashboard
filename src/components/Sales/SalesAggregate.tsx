@@ -19,13 +19,18 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
   }, [data])
 
   // Calculate sales rep with the most sales
-  const mostSalesRep = getRepWithMostSales(data)
+  const mostSalesRep = useMemo(() => {
+    return getRepWithMostSales(data)
+  }, [data])
+
   const repName = mostSalesRep
     ? `${mostSalesRep.first_name} ${mostSalesRep.last_name}`
     : ''
 
   // Calculate highest selling make
-  const highestSellingMake = getMakeWithMostSales(data)
+  const highestSellingMake = useMemo(() => {
+    return getMakeWithMostSales(data)
+  }, [data])
 
   // Cards data
   const cards = [
