@@ -12,6 +12,7 @@ import SalesByDateChart from '@components/SalesAnalytics/SalesByDate'
 import SalesByMake from '@components/SalesAnalytics/SalesByMake'
 import SalesByPrice from '@components/SalesAnalytics/SalesByPrice'
 import SalesByMileage from '@components/SalesAnalytics/SalesByMileage'
+import Loading from '@components/Loading/loading'
 
 export interface Sale {
   user: number
@@ -49,6 +50,7 @@ export interface SalesData {
 export default function SaleDashboard() {
   const [session, setSession] = useState<User | null>(null)
   const [sales, setSales] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getSession()
@@ -64,6 +66,8 @@ export default function SaleDashboard() {
 
   async function getSales() {
     try {
+      setLoading(true)
+
       const sales = (await getAllSales().then((res) => res.data)) || []
       // if the user is a sales-rep they are only allowed to see their own sales
       if (session && session.role === UserRole.SALES_REP) {
@@ -73,6 +77,8 @@ export default function SaleDashboard() {
     } catch (error) {
       toast.error(`Failed to retrieve sales. Please refresh the page.`)
       console.error('Failed to retrieve sales.', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -98,56 +104,60 @@ export default function SaleDashboard() {
 
   return (
     <>
-      <div
-        style={{
-          marginLeft: '200px',
-          top: ' 0',
-          bottom: ' 0',
-          left: ' 0',
-          position: 'fixed',
-        }}
-      >
-        <div>
-          <h1 style={{ justifyContent: 'left', margin: '10px 20px 20px' }}>
-            Summary
-          </h1>
-          <SalesAggregate data={sales} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <div
+          style={{
+            marginLeft: '200px',
+            top: ' 0',
+            bottom: ' 0',
+            left: ' 0',
+            position: 'fixed',
+          }}
+        >
+          <div>
+            <h1 style={{ justifyContent: 'left', margin: '10px 20px 20px' }}>
+              Summary
+            </h1>
+            <SalesAggregate data={sales} />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+              }}
+            >
+              <SalesByDateChart salesData={sales} />
+              <SalesByCarYear salesData={sales} />
+              <SalesByCondition salesData={sales} />
+              <SalesByMileage salesData={sales} />
+              <SalesByPrice salesData={sales} />
+              <SalesByMake salesData={sales} />
+            </div>
+          </div>
+
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
+              gridTemplateColumns: 'repeat(1, 2fr)',
+              marginTop: '20px',
+              maxHeight: '50%',
             }}
           >
-            <SalesByDateChart salesData={sales} />
-            <SalesByCarYear salesData={sales} />
-            <SalesByCondition salesData={sales} />
-            <SalesByMileage salesData={sales} />
-            <SalesByPrice salesData={sales} />
-            <SalesByMake salesData={sales} />
+            <h1 style={{ justifyContent: 'left', margin: '10px 20px' }}>
+              All Sales
+            </h1>
+            <div
+              style={{
+                overflowX: 'hidden',
+                overflowY: 'scroll',
+              }}
+            >
+              <SalesTable data={sales} onDelete={handleDelete} />
+            </div>
           </div>
         </div>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(1, 2fr)',
-            marginTop: '20px',
-            maxHeight: '50%',
-          }}
-        >
-          <h1 style={{ justifyContent: 'left', margin: '10px 20px' }}>
-            All Sales
-          </h1>
-          <div
-            style={{
-              overflowX: 'hidden',
-              overflowY: 'scroll',
-            }}
-          >
-            <SalesTable data={sales} onDelete={handleDelete} />
-          </div>
-        </div>
-      </div>
+      )}
     </>
   )
 }

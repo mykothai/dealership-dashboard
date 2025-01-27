@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { getAllUsers, updateUserById } from '@api/UserApi'
 import { UserRole } from '@constants'
+import Loading from '@components/Loading/loading'
 
 export interface User {
   id: number
@@ -15,6 +16,7 @@ export interface User {
 
 export default function UserDashboard() {
   const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const headers = [
     { key: 'id', label: 'ID' },
@@ -31,11 +33,15 @@ export default function UserDashboard() {
 
   async function getUsers() {
     try {
+      setLoading(true)
+
       const vehicles = (await getAllUsers().then((res) => res.data)) || []
       setUsers(vehicles)
     } catch (error) {
       toast.error('Failed to retrieve users. Please refresh the page.')
       console.error('Failed to retrieve users.', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -65,7 +71,11 @@ export default function UserDashboard() {
 
   return (
     <>
-      <DataTable headers={headers} data={users} onEdit={handleEdit} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <DataTable headers={headers} data={users} onEdit={handleEdit} />
+      )}
     </>
   )
 }

@@ -9,11 +9,13 @@ import SaleDashboard from '@components/Dashboards/Sales'
 import UserDashboard, { User } from '@components/Dashboards/Users'
 import VehicleDashboard from '@components/Dashboards/Vehicles'
 import SidebarMenu from '@components/Menu/SideMenu'
+import Loading from '@components/Loading/loading'
 
 function App() {
   // use user's email validated against existing users as a 'token'
   const [session, setSession] = useState<User | null>(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const savedSession = localStorage.getItem('session')
@@ -26,6 +28,7 @@ function App() {
   async function getUsers(email: string) {
     // call data base to get user by email
     try {
+      setLoading(true)
       const users = (await getAllUsers().then((res) => res.data)) || []
       const currentUser = users.filter((user: User) => user.email === email)[0]
 
@@ -44,6 +47,8 @@ function App() {
       setIsLoggedIn(true)
     } catch (error) {
       console.error('Failed to retrieve user.', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -58,17 +63,22 @@ function App() {
       <ToastContainer position="top-center" autoClose={2000} />
       <Router>
         {isLoggedIn && <SidebarMenu handleLogout={handleLogout} />}
-        <Routes>
-          <Route
-            path=""
-            element={<LoginPage getUsers={getUsers} isLoggedIn={isLoggedIn} />}
-          />
-          <Route path="/sales" element={<SaleDashboard />} />
-          <Route path="/users" element={<UserDashboard />} />
-          <Route path="/vehicles" element={<VehicleDashboard />} />
-
-          <Route path="/404" element={<NotFoundPage />} />
-        </Routes>
+        {loading ? (
+          <Loading />
+        ) : (
+          <Routes>
+            <Route
+              path=""
+              element={
+                <LoginPage getUsers={getUsers} isLoggedIn={isLoggedIn} />
+              }
+            />
+            <Route path="/sales" element={<SaleDashboard />} />
+            <Route path="/users" element={<UserDashboard />} />
+            <Route path="/vehicles" element={<VehicleDashboard />} />
+            <Route path="/404" element={<NotFoundPage />} />
+          </Routes>
+        )}
       </Router>
     </div>
   )

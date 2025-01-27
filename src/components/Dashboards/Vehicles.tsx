@@ -7,9 +7,10 @@ import {
   updateVehicle,
 } from '@api/VehicleApi'
 import DataTable from '@components/Tables/DataTable'
-import { Sale } from '@components/Sales/SaleDashboard'
 import { sellVehicle } from '@api/SalesApi'
 import { toast } from 'react-toastify'
+import { Sale } from './Sales'
+import Loading from '@components/Loading/loading'
 
 export interface Vehicle {
   id: number
@@ -26,6 +27,7 @@ export interface Vehicle {
 
 export default function VehicleDashboard() {
   const [vehicles, setVehicles] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const headers = [
     { key: 'id', label: 'ID' },
@@ -46,11 +48,15 @@ export default function VehicleDashboard() {
 
   async function getVehicles() {
     try {
+      setLoading(true)
+
       const vehicles = (await getAllVehicles().then((res) => res.data)) || []
       setVehicles(vehicles)
     } catch (error) {
       toast.error(`Failed to retrieve vehicles. Please refresh the page.`)
       console.error('Failed to retrieve vehicles.', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -151,14 +157,18 @@ export default function VehicleDashboard() {
 
   return (
     <>
-      <DataTable
-        headers={headers}
-        data={vehicles}
-        onAdd={handleCreate}
-        onSale={handleSale}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <DataTable
+          headers={headers}
+          data={vehicles}
+          onAdd={handleCreate}
+          onSale={handleSale}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      )}
     </>
   )
 }
