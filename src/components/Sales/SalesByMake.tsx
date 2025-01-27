@@ -39,7 +39,6 @@ export default function SalesByMake({ salesData }: Props) {
             fill="#ffc658"
             label={({ make }) => `${make}`}
             labelLine={false}
-            
           >
             {formattedData.map((_entry, index) => (
               <Cell

@@ -91,7 +91,7 @@ export default function SaleDashboard({ session }) {
         }}
       >
         <div>
-          <h1 style={{ justifyContent: 'left', margin: '10px 20px' }}>
+          <h1 style={{ justifyContent: 'left', margin: '10px 20px 20px' }}>
             Summary
           </h1>
           <SalesAggregate data={sales} />
