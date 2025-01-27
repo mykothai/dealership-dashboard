@@ -3,15 +3,15 @@ import './SideMenu.css'
 import { useEffect, useState } from 'react'
 import { User } from '@components/Dashboards/Users'
 
+interface MenuOption {
+  label: string
+  path: string
+}
+
 export default function SidebarMenu({ handleLogout }) {
   const [session, setSession] = useState<User | null>(null)
   const [activePath, setActivePath] = useState<string>('')
   const navigate = useNavigate()
-
-  interface MenuOption {
-    label: string
-    path: string
-  }
 
   useEffect(() => {
     const savedSession = localStorage.getItem('session')
