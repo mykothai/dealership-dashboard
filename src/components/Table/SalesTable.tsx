@@ -276,7 +276,7 @@ const StyledTableCell = styled(TableCell)(() => ({
 }))
 
 const StyledTableHeaderCell = styled(TableCell)(() => ({
-  backgroundColor: '#ed254e',
+  backgroundColor: '#E68E22',
   fontWeight: 'bold',
   borderBottom: 'none',
   color: 'white',
@@ -302,6 +302,6 @@ const StyledDialogActions = styled(DialogContent)(() => ({
 
 const StyledButton = styled(Button)(() => ({
   color: 'white',
-  backgroundColor: '#ed254e',
+  backgroundColor: '#E68E22',
   cursor: 'pointer',
 }))

@@ -3,6 +3,7 @@ import { deleteSale, getAllSales } from '../../api/SalesApi'
 import { UserRole } from '../../constants'
 import SalesTable from '@components/Table/SalesTable'
 import SalesByDateChart from './SalesByDate'
+import SalesAggregate from './SalesAggregate'
 
 export interface Sale {
   user: number
@@ -51,7 +52,6 @@ export default function SaleDashboard({ session }) {
       if (session.role === UserRole.SALES_REP) {
         sales.filter((sale: SalesData) => sale.sales_rep.id === session.id)
       }
-
       setSales(sales)
     } catch (error) {
       console.error('Failed to retrieve sales.', error)
@@ -89,6 +89,7 @@ export default function SaleDashboard({ session }) {
           <h1 style={{ justifyContent: 'left', margin: '10px 20px' }}>
             Summary
           </h1>
+          <SalesAggregate data={sales} />
           <div
             style={{
               display: 'grid',

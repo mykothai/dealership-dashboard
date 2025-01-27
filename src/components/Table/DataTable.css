@@ -5,7 +5,7 @@ Table {
 }
 
 .table-cell {
-  background-color: #ed254e;
+  background-color: #e68e22;
   font: bold;
 }
 
@@ -32,7 +32,7 @@ Table {
 }
 
 .modal .save {
-  background-color: #ed254e;
+  background-color: #e68e22;
 }
 
 .modal .save:hover {

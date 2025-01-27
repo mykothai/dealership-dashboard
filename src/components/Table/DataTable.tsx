@@ -180,7 +180,7 @@ export default function DataTable({
             startIcon={<MdAdd />}
             onClick={() => handleAdd()}
             sx={{
-              backgroundColor: '#ed254e',
+              backgroundColor: '#E68E22',
               color: 'white',
               fontSize: 'small',
               margin: '0 0 0 30px',
