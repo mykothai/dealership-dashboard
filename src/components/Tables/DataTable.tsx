@@ -168,11 +168,6 @@ export default function DataTable({
           fullWidth
           value={searchParams}
           onChange={handleSearch}
-          style={{ color: 'white' }}
-          slotProps={{
-            inputLabel: { style: { color: 'white' } },
-            htmlInput: { style: { color: 'white' } },
-          }}
         />
         {onAdd && (
           <Button
@@ -180,13 +175,12 @@ export default function DataTable({
             startIcon={<MdAdd />}
             onClick={() => handleAdd()}
             sx={{
-              backgroundColor: '#E68E22',
+              backgroundColor: '#011936',
               color: 'white',
               fontSize: 'small',
               margin: '0 0 0 30px',
-              maxHeight: '50px',
               '&:hover': {
-                backgroundColor: '#011936',
+                backgroundColor: '#0056b3',
               },
             }}
           >
@@ -210,6 +204,16 @@ export default function DataTable({
                       sortColumn === header.key ? sortDirection : 'asc'
                     }
                     onClick={() => handleSort(header.key)}
+                    sx={{
+                      color: 'white',
+                      '&:hover': { color: 'white' },
+                      '&.Mui-active': {
+                        color: 'white',
+                      },
+                      '& .MuiTableSortLabel-icon': {
+                        color: 'white !important',
+                      },
+                    }}
                   >
                     {header.label}
                   </TableSortLabel>
@@ -239,7 +243,7 @@ export default function DataTable({
                   {headers.map((header) => (
                     <TableCell
                       key={header.key}
-                      style={{ color: 'white', borderBottom: 'none' }}
+                      style={{ color: '#011936', borderBottom: 'none' }}
                     >
                       {urlHeaders.includes(header.key) ? (
                         <img
@@ -287,7 +291,6 @@ export default function DataTable({
                   rowSpan={4}
                   className="empty-table"
                   style={{
-                    color: 'white',
                     borderBottom: 'none',
                     whiteSpace: 'nowrap',
                   }}
@@ -307,11 +310,6 @@ export default function DataTable({
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         rowsPerPageOptions={[10, 25, 50, 100]}
-        sx={{
-          '.MuiTablePagination-selectIcon': { color: 'white' },
-          '.MuiTablePagination-actions > button': { color: 'white' },
-          '.MuiTablePagination-toolbar': { color: 'white' },
-        }}
       />
       <Dialog
         aria-modal
@@ -319,31 +317,15 @@ export default function DataTable({
         open={!!editRow}
         onClose={handleCancelEdit}
       >
-        <DialogTitle
-          style={{
-            color: 'white',
-            backgroundColor: '#465362',
-          }}
-        >
-          Edit
-        </DialogTitle>
+        <DialogTitle>Edit</DialogTitle>
 
-        <DialogContent
-          style={{
-            color: 'white',
-            backgroundColor: '#465362',
-          }}
-        >
+        <DialogContent>
           {headers.map((header) => (
             <TextField
               key={header.key}
               label={header.label}
               fullWidth
               margin="dense"
-              slotProps={{
-                inputLabel: { style: { color: 'white' } },
-                htmlInput: { style: { color: 'white' } },
-              }}
               value={editRow?.[header.key] || ''}
               onChange={(e) =>
                 setEditRow((prev) =>
@@ -354,12 +336,7 @@ export default function DataTable({
           ))}
         </DialogContent>
 
-        <DialogActions
-          style={{
-            color: 'white',
-            backgroundColor: '#465362',
-          }}
-        >
+        <DialogActions>
           <Button className="cancel" onClick={handleCancelEdit}>
             Cancel
           </Button>
@@ -374,21 +351,9 @@ export default function DataTable({
         open={!!addRow}
         onClose={handleCancelEdit}
       >
-        <DialogTitle
-          style={{
-            color: 'white',
-            backgroundColor: '#465362',
-          }}
-        >
-          Add new vehicle
-        </DialogTitle>
+        <DialogTitle>Add new vehicle</DialogTitle>
 
-        <DialogContent
-          style={{
-            color: 'white',
-            backgroundColor: '#465362',
-          }}
-        >
+        <DialogContent>
           {headers.map(
             (header) =>
               header.key !== 'id' && (
@@ -397,10 +362,6 @@ export default function DataTable({
                   label={header.label}
                   fullWidth
                   margin="dense"
-                  slotProps={{
-                    inputLabel: { style: { color: 'white' } },
-                    htmlInput: { style: { color: 'white' } },
-                  }}
                   value={addRow?.[header.key] || ''}
                   onChange={(e) =>
                     setAddRow((prev) =>
@@ -412,12 +373,7 @@ export default function DataTable({
           )}
         </DialogContent>
 
-        <DialogActions
-          style={{
-            color: 'white',
-            backgroundColor: '#465362',
-          }}
-        >
+        <DialogActions>
           <Button className="cancel" onClick={handleCancelAdd}>
             Cancel
           </Button>
@@ -441,16 +397,16 @@ export default function DataTable({
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: '#465362',
+    backgroundColor: '#fff',
   },
   '&:nth-of-type(even)': {
-    backgroundColor: '#6B747F',
+    backgroundColor: '#D5D6D7',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
   '&:hover': {
-    backgroundColor: '#011936 !important',
+    backgroundColor: '#ADD5FF !important',
   },
 }))

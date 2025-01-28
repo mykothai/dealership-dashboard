@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import './SideMenu.css'
 import { useEffect, useState } from 'react'
 import { User } from '@components/Dashboards/Users'
+import { Button } from '@mui/material'
+import './SideMenu.css'
 
 interface MenuOption {
   label: string
@@ -65,16 +67,15 @@ export default function SidebarMenu({ handleLogout }) {
               {option.label}
             </button>
           ))}
-          <div>
-            <button
-              className="logout"
+          <div className="logout">
+            <Button className="logout-button"
               onClick={() => {
                 onLogout()
                 navigate('/')
               }}
             >
               Logout
-            </button>
+            </Button>
           </div>
         </nav>
       </div>

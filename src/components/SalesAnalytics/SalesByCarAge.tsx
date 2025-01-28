@@ -43,8 +43,8 @@ export default function SalesByCarYear({ salesData }: Props) {
           data={formattedData.length ? formattedData : [{ year: '', count: 0 }]}
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >
-          <XAxis dataKey="year" stroke="#fff" />
-          <YAxis dataKey="count" stroke="#fff" allowDecimals={false} />
+          <XAxis dataKey="year"  />
+          <YAxis dataKey="count"  allowDecimals={false} />
           <Tooltip />
           <Bar dataKey="count" fill="#82ca9d" />
         </BarChart>

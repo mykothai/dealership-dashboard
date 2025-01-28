@@ -1,0 +1,18 @@
+.save {
+  color: white;
+  background-color: #011936;
+}
+
+.save:hover {
+  background-color: #0056b3;
+}
+
+.cancel {
+  color: black;
+  background-color: #d5d6d7;
+}
+
+.cancel:hover {
+  color: white;
+  background-color: #0056b3;
+}

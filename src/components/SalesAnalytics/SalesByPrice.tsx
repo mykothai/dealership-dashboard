@@ -45,8 +45,8 @@ export default function SalesByPrice({ salesData }: Props) {
           data={formattedData}
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >
-          <XAxis dataKey="price" stroke="#fff" />
-          <YAxis dataKey="count" stroke="#fff" allowDecimals={false} />
+          <XAxis dataKey="price"  />
+          <YAxis dataKey="count"  allowDecimals={false} />
           <Tooltip />
           <Bar dataKey="count" fill="#8dd1e1" />
         </BarChart>

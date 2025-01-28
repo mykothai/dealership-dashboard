@@ -14,10 +14,6 @@ Table {
   margin-left: 200px; /* same width as sidebar */
 }
 
-.action-icon {
-  color: #ffffff;
-}
-
 .table-wrapper .empty-table {
   display: flex;
   align-items: center;

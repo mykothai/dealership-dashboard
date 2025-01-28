@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { deleteSale, getAllSales } from '@api/SalesApi'
 import { UserRole } from '@constants'
 import SalesTable from '@components/Tables/SalesTable'
-
 import { User } from '@components/Dashboards/Users'
 import { toast } from 'react-toastify'
 import SalesAggregate from '@components/SalesAnalytics/SalesAggregate'
@@ -113,7 +112,6 @@ export default function SaleDashboard() {
             top: ' 0',
             bottom: ' 0',
             left: ' 0',
-            position: 'fixed',
           }}
         >
           <div>
@@ -140,17 +138,15 @@ export default function SaleDashboard() {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(1, 2fr)',
-              marginTop: '20px',
               maxHeight: '50%',
             }}
           >
-            <h1 style={{ justifyContent: 'left', margin: '10px 20px' }}>
+            <h1 style={{ justifyContent: 'left', margin: '0 0 10px 20px' }}>
               All Sales
             </h1>
             <div
               style={{
                 overflowX: 'hidden',
-                overflowY: 'scroll',
               }}
             >
               <SalesTable data={sales} onDelete={handleDelete} />

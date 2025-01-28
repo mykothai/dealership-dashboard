@@ -127,22 +127,22 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
             width: 200,
             height: '100%',
             borderRadius: '8px',
-            backgroundColor: '#E68E22',
+            backgroundColor: '#011936',
           }}
         >
           <CardContent sx={{ height: '100%' }}>
             <Typography
-              variant="h6"
               component="div"
               align="center"
               color="white"
+              margin={'8px 0'}
             >
               {card.title}
             </Typography>
             <Typography
               variant="h5"
               align="center"
-              color="black"
+              color="white"
               fontWeight="bold"
             >
               {card.description}

@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
 } from '@mui/material'
+import './SellingDialog.css'
 
 export default function SellingDialog({ open, saleData, onCancel, onSave }) {
   const [formData, setFormData] = useState(saleData)
@@ -24,28 +25,12 @@ export default function SellingDialog({ open, saleData, onCancel, onSave }) {
 
   return (
     <Dialog aria-modal open={open} onClose={onCancel}>
-      <DialogTitle
-        style={{
-          color: 'white',
-          backgroundColor: '#465362',
-        }}
-      >
-        Sell Vehicle
-      </DialogTitle>
-      <DialogContent
-        style={{
-          color: 'white',
-          backgroundColor: '#465362',
-        }}
-      >
+      <DialogTitle>Sell Vehicle</DialogTitle>
+      <DialogContent>
         <TextField
           label="User"
           fullWidth
           margin="dense"
-          slotProps={{
-            inputLabel: { style: { color: 'white' } },
-            htmlInput: { style: { color: 'white' } },
-          }}
           value={formData.user}
           onChange={(e) => handleChange('user', e.target.value)}
         />
@@ -53,10 +38,6 @@ export default function SellingDialog({ open, saleData, onCancel, onSave }) {
           label="Vehicle"
           fullWidth
           margin="dense"
-          slotProps={{
-            inputLabel: { style: { color: 'white' } },
-            htmlInput: { style: { color: 'white' } },
-          }}
           value={formData.vehicle}
           onChange={(e) => handleChange('vehicle', e.target.value)}
           disabled
@@ -65,10 +46,6 @@ export default function SellingDialog({ open, saleData, onCancel, onSave }) {
           label="Selling Price"
           fullWidth
           margin="dense"
-          slotProps={{
-            inputLabel: { style: { color: 'white' } },
-            htmlInput: { style: { color: 'white' } },
-          }}
           type="number"
           value={formData.selling_price}
           onChange={(e) =>
@@ -79,21 +56,17 @@ export default function SellingDialog({ open, saleData, onCancel, onSave }) {
           label="Date"
           fullWidth
           margin="dense"
-          slotProps={{
-            inputLabel: { style: { color: 'white' } },
-            htmlInput: { style: { color: 'white' } },
-          }}
           type="date"
           value={formData.date}
           onChange={(e) => handleChange('date', e.target.value)}
+          slotProps={{
+            inputLabel: {
+              shrink: true,
+            },
+          }}
         />
       </DialogContent>
-      <DialogActions
-        style={{
-          color: 'white',
-          backgroundColor: '#465362',
-        }}
-      >
+      <DialogActions>
         <Button className="cancel" onClick={onCancel}>
           Cancel
         </Button>

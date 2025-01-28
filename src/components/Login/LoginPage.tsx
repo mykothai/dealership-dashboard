@@ -3,6 +3,7 @@ import './LoginPage.css'
 import { MdOutlineEmail } from 'react-icons/md'
 import { Navigate } from 'react-router-dom'
 import { UserRole } from '@constants'
+import { Button } from '@mui/material'
 
 export default function LoginPage({ getUsers, isLoggedIn }) {
   const [email, setEmail] = useState('')
@@ -53,7 +54,9 @@ export default function LoginPage({ getUsers, isLoggedIn }) {
             />
           </div>
 
-          <button type="submit">Login</button>
+          <Button variant="contained" type="submit">
+            Login
+          </Button>
         </form>
       </div>
     </>

@@ -13,6 +13,7 @@ import {
   Button,
   TablePagination,
   TableSortLabel,
+  DialogActions,
 } from '@mui/material'
 import { SalesData } from '@components/Sales/SaleDashboard'
 import { MdDeleteForever } from 'react-icons/md'
@@ -70,16 +71,16 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
           <TableHead>
             <TableRow>
               <StyledTableHeaderCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={sortColumn === 'date'}
                   direction={sortColumn === 'date' ? sortDirection : 'asc'}
                   onClick={() => handleSort('date')}
                 >
                   Date
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableHeaderCell>
               <StyledTableHeaderCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={sortColumn === 'vehicle.make'}
                   direction={
                     sortColumn === 'vehicle.make' ? sortDirection : 'asc'
@@ -87,10 +88,10 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                   onClick={() => handleSort('vehicle.make')}
                 >
                   Vehicle
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableHeaderCell>
               <StyledTableHeaderCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={sortColumn === 'selling_price'}
                   direction={
                     sortColumn === 'selling_price' ? sortDirection : 'asc'
@@ -98,19 +99,19 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                   onClick={() => handleSort('selling_price')}
                 >
                   Selling Price
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableHeaderCell>
               <StyledTableHeaderCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={sortColumn === 'profit'}
                   direction={sortColumn === 'profit' ? sortDirection : 'asc'}
                   onClick={() => handleSort('profit')}
                 >
                   Profit
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableHeaderCell>
               <StyledTableHeaderCell>
-                <TableSortLabel
+                <StyledTableSortLabel
                   active={sortColumn === 'sales_rep.first_name'}
                   direction={
                     sortColumn === 'sales_rep.first_name'
@@ -120,7 +121,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                   onClick={() => handleSort('sales_rep.first_name')}
                 >
                   Sales Rep
-                </TableSortLabel>
+                </StyledTableSortLabel>
               </StyledTableHeaderCell>
               <StyledTableHeaderCell>Delete</StyledTableHeaderCell>
             </TableRow>
@@ -151,7 +152,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                         onDelete(row.id)
                       }}
                     >
-                      <MdDeleteForever className="action-icon" />
+                      <MdDeleteForever />
                     </IconButton>
                   </StyledTableCell>
                 </StyledTableRow>
@@ -162,7 +163,6 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                   rowSpan={4}
                   className="empty-table"
                   style={{
-                    color: 'white',
                     borderBottom: 'none',
                     whiteSpace: 'nowrap',
                   }}
@@ -185,14 +185,10 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
         }
         rowsPerPageOptions={[10, 25, 50, 100]}
         sx={{
-          '.MuiTablePagination-selectIcon': { color: 'white' },
-          '.MuiTablePagination-actions > button': { color: 'white' },
-          '.MuiTablePagination-toolbar': { color: 'white' },
           position: 'sticky',
           left: 0,
           bottom: 0,
           zIndex: 2,
-          backgroundColor: '#465362',
         }}
       />
 
@@ -200,11 +196,11 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
         aria-modal
         open={!!selectedRow}
         onClose={handleCloseDetails}
-        slotProps={{ paper: { style: { maxWidth: '500px' } } }}
+        // slotProps={{ paper: { style: { maxWidth: '500px' } } }}
         className="modal"
       >
-        <StyledDialogTitle>Sale Details</StyledDialogTitle>
-        <StyledDialogContent>
+        <DialogTitle>Sale Details</DialogTitle>
+        <DialogContent>
           {selectedRow && (
             <div>
               <p>
@@ -242,12 +238,12 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
               </p>
             </div>
           )}
-        </StyledDialogContent>
-        <StyledDialogActions>
+        </DialogContent>
+        <DialogActions>
           <StyledButton className="close" onClick={handleCloseDetails}>
             Close
           </StyledButton>
-        </StyledDialogActions>
+        </DialogActions>
       </Dialog>
     </div>
   )
@@ -255,52 +251,50 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
 
 const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: '#465362',
+    backgroundColor: '#fff',
   },
   '&:nth-of-type(even)': {
-    backgroundColor: '#6B747F',
+    backgroundColor: '#D5D6D7',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
   '&:hover': {
-    backgroundColor: '#011936 !important',
+    backgroundColor: '#ADD5FF !important',
   },
 }))
 
 const StyledTableCell = styled(TableCell)(() => ({
-  color: 'white',
   borderBottom: 'none',
 }))
 
 const StyledTableHeaderCell = styled(TableCell)(() => ({
-  backgroundColor: '#E68E22',
+  backgroundColor: '#011936',
+  color: 'white',
   fontWeight: 'bold',
   borderBottom: 'none',
-  color: 'white',
-  position: 'sticky',
   top: 0,
   zIndex: 1,
 }))
 
-const StyledDialogTitle = styled(DialogTitle)(() => ({
-  color: 'white',
-  backgroundColor: '#465362',
-}))
-
-const StyledDialogContent = styled(DialogContent)(() => ({
-  color: 'white',
-  backgroundColor: '#465362',
-}))
-
-const StyledDialogActions = styled(DialogContent)(() => ({
-  color: 'white',
-  backgroundColor: '#465362',
-}))
-
 const StyledButton = styled(Button)(() => ({
+  backgroundColor: '#011936',
   color: 'white',
-  backgroundColor: '#E68E22',
   cursor: 'pointer',
+
+  '&:hover': {
+    backgroundColor: '#0056b3',
+  },
+}))
+
+const StyledTableSortLabel = styled(TableSortLabel)(() => ({
+  color: 'white',
+  '&:hover': { color: 'white' },
+  '&.Mui-active': {
+    color: 'white',
+  },
+  '& .MuiTableSortLabel-icon': {
+    color: 'white !important',
+  },
 }))

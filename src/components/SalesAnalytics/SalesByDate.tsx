@@ -38,7 +38,7 @@ export default function SalesByDateChart({ salesData }: SalesByDateChartProps) {
         overflowY: 'hidden',
       }}
     >
-      <p>Sales by Date</p>
+      <div>Sales by Date</div>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={
@@ -48,8 +48,8 @@ export default function SalesByDateChart({ salesData }: SalesByDateChartProps) {
           }
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >
-          <XAxis dataKey="date" stroke="#fff" />
-          <YAxis dataKey="count" stroke="#fff" allowDecimals={false} />
+          <XAxis dataKey="date" />
+          <YAxis dataKey="count" allowDecimals={false} />
           <Tooltip />
           <Line
             type="monotone"

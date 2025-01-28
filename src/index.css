@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #465362;
+  background-color: #fff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,6 +24,8 @@ body {
   min-height: 100vh;
   justify-content: center;
   align-items: center;
+  color: black;
+
 }
 
 h1 {
@@ -32,10 +34,11 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
+  color: #011936;
 }
 
 button {
-  background-color: #e68e22;
+  background-color: #011936;
   cursor: pointer;
 }
 

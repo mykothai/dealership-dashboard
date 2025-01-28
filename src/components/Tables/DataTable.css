@@ -5,7 +5,7 @@ Table {
 }
 
 .table-cell {
-  background-color: #e68e22;
+  background-color: #011936;
   font: bold;
 }
 
@@ -26,25 +26,27 @@ Table {
   padding: 16px;
 }
 
-.modal button {
-  color: white;
-  cursor: pointer;
-}
-
 .modal .save {
-  background-color: #e68e22;
+  color: white;
+  background-color: #011936;
 }
 
 .modal .save:hover {
-  background-color: #011936;
+  background-color: #0056b3;
+}
+
+.modal .cancel {
+  color: black;
+  background-color: #d5d6d7;
 }
 
 .modal .cancel:hover {
-  background-color: #011936;
+  color: white;
+  background-color: #0056b3;
 }
 
 .action-icon {
-  color: #ffffff;
+  color: #011936;
 }
 
 .table-wrapper .empty-table {
