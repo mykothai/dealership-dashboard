@@ -44,15 +44,15 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
     },
     {
       title: 'Avg. Profit/Car',
-      description: `${formatCurrency(totalProfits / totalCarsSold)}`,
+      description: totalCarsSold ? `${formatCurrency(totalProfits / totalCarsSold)}` : 0,
     },
     {
       title: 'Most Sales',
-      description: repName,
+      description: repName ? repName : '-',
     },
     {
       title: 'Best Selling Make',
-      description: highestSellingMake,
+      description: highestSellingMake ? highestSellingMake : '-',
     },
   ]
 
