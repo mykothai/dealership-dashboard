@@ -59,16 +59,16 @@ export default function SidebarMenu({ handleLogout }) {
       <div className="sidebar">
         <nav className="content">
           {availableOptions.map((option) => (
-            <button
-              className={`items ${activePath === option.path ? 'active' : ''}`}
+            <Button
+              className={`items ${activePath === option.path ? 'active' : 'dormant'}`}
               key={option.path}
               onClick={() => handleNavigation(option.path)}
             >
               {option.label}
-            </button>
+            </Button>
           ))}
           <div className="logout">
-            <Button className="logout-button"
+            <Button className="logout button"
               onClick={() => {
                 onLogout()
                 navigate('/')

@@ -34,11 +34,22 @@
   display: block;
   border: none;
   text-align: right;
+  color: white;
 }
 
 .items.active {
   font-weight: bold;
   background-color: #0056b3;
+  color: white;
+}
+
+.items.dormant {
+  color: white;
+  font-weight: normal;
+  &:hover {
+    background-color: #0056b3;
+    font-weight: bold;
+  }
 }
 
 .logout {
@@ -50,14 +61,14 @@
   cursor: pointer;
 }
 
-.logout-button {
+.logout.button {
   width: 100%;
-
   color: white;
-  background-color: #0056b3;
+  background-color: #011936;
 }
 
-.logout-button:hover {
+.logout.button:hover {
   color: white;
+  font-weight: bold;
   background-color: #0056b3;
 }

@@ -6,3 +6,15 @@
   width: 100%;
   font-size: 500%;
 }
+
+.back.button {
+  color: white;
+  font-weight: normal;
+  background-color: #011936;
+}
+
+.back.button:hover {
+  color: white;
+  font-weight: bold;
+  background-color: #0056b3;
+}

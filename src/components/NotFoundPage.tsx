@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import './NotFoundPage.css'
 import { TbError404 } from 'react-icons/tb'
+import { Button } from '@mui/material'
+import './NotFoundPage.css'
 
 export default function NotFoundPage() {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ export default function NotFoundPage() {
       <TbError404 className="not-found" />
       <div className="text-center">
         <p>Oops! The page you are looking for could not be found.</p>
-        <button onClick={() => navigate('/')}>Go Back</button>
+        <Button className="back button" onClick={() => navigate('/')}>Go Back</Button>
       </div>
     </div>
   )
