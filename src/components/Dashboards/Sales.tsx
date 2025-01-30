@@ -112,6 +112,8 @@ export default function SaleDashboard() {
             top: ' 0',
             bottom: ' 0',
             left: ' 0',
+            position: 'fixed',
+            overflowY: 'scroll',
           }}
         >
           <div>

@@ -40,11 +40,15 @@ export default function SalesByCarYear({ salesData }: Props) {
       <p>Sales by Car Year</p>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          data={formattedData.length ? formattedData : [{ year: '', count: 0 }]}
+          data={
+            formattedData.length
+              ? formattedData
+              : [{ year: new Date().getFullYear(), count: 0 }]
+          }
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >
-          <XAxis dataKey="year"  />
-          <YAxis dataKey="count"  allowDecimals={false} />
+          <XAxis dataKey="year" />
+          <YAxis dataKey="count" allowDecimals={false} />
           <Tooltip />
           <Bar dataKey="count" fill="#82ca9d" />
         </BarChart>
