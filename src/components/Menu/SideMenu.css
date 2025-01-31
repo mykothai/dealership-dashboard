@@ -10,6 +10,11 @@
   background-color: #011936;
 }
 
+@media (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
+}
 .content {
   position: fixed;
   background-color: #011936;

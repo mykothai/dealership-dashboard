@@ -17,6 +17,13 @@ Table {
   overflow-y: scroll;
   overflow-x: hidden;
   margin-left: 200px; /* same width as sidebar */
+  padding: 20px;
+}
+
+@media (max-width: 800px) {
+  .table-wrapper {
+    margin-left: 0;
+  }
 }
 
 .table-header {
@@ -54,4 +61,18 @@ Table {
   align-items: center;
   justify-content: center;
   font-size: large;
+}
+
+.add.button {
+  color: white;
+  font-weight: normal;
+  background-color: #011936;
+  margin: 0 25px 0 0;
+  height: 50%;
+  text-transform: inherit;
+
+  &:hover {
+    background-color: #0056b3;
+    font-weight: bold;
+  }
 }

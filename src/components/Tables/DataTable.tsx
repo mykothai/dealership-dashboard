@@ -15,6 +15,8 @@ import {
   DialogContent,
   DialogTitle,
   TableSortLabel,
+  Tooltip,
+  Paper,
 } from '@mui/material'
 import { MdAdd, MdEdit } from 'react-icons/md'
 import { MdDeleteForever } from 'react-icons/md'
@@ -24,6 +26,7 @@ import { getComparator } from '@helpers'
 import './DataTable.css'
 import SellingDialog from '@components/Dialogs/SellingDialog'
 import { styled } from '@mui/material/styles'
+import OverflowTooltip from '@components/OverflowTooltip'
 
 interface Headers {
   key: string
@@ -162,6 +165,17 @@ export default function DataTable({
   return (
     <div className="table-wrapper">
       <div className="table-header">
+        {onAdd && (
+          <Button
+            className="add button"
+            variant="contained"
+            size="small"
+            startIcon={<MdAdd className="add icon" />}
+            onClick={() => handleAdd()}
+          >
+            Add New Vehicle
+          </Button>
+        )}
         <TextField
           label="Search"
           variant="outlined"
@@ -169,34 +183,37 @@ export default function DataTable({
           value={searchParams}
           onChange={handleSearch}
         />
-        {onAdd && (
-          <Button
-            variant="contained"
-            startIcon={<MdAdd />}
-            onClick={() => handleAdd()}
-            sx={{
-              backgroundColor: '#011936',
-              color: 'white',
-              fontSize: 'small',
-              margin: '0 0 0 30px',
-              '&:hover': {
-                backgroundColor: '#0056b3',
-              },
-            }}
-          >
-            Add New Vehicle
-          </Button>
-        )}
       </div>
-      <TableContainer>
-        <Table size="small">
+      <TableContainer
+        sx={{
+          maxWidth: '100%',
+          overflowX: 'auto',
+        }}
+      >
+        <Table
+          size="small"
+          sx={{
+            tableLayout: 'block',
+            '@media (min-width: 800px)': { display: 'table' },
+            minWidth: 420,
+          }}
+        >
           <TableHead>
             <TableRow>
               {headers.map((header) => (
                 <TableCell
                   className="table-cell"
                   key={header.key}
-                  style={{ color: 'white' }}
+                  sx={{
+                    color: 'white',
+                    width: 'auto',
+                    minWidth: 100,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    '@media (max-width: 800px)': {
+                      display: header.key === 'id' ? 'none' : 'table-cell',
+                    },
+                  }}
                 >
                   <TableSortLabel
                     active={sortColumn === header.key}
@@ -207,9 +224,7 @@ export default function DataTable({
                     sx={{
                       color: 'white',
                       '&:hover': { color: 'white' },
-                      '&.Mui-active': {
-                        color: 'white',
-                      },
+                      '&.Mui-active': { color: 'white' },
                       '& .MuiTableSortLabel-icon': {
                         color: 'white !important',
                       },
@@ -243,7 +258,16 @@ export default function DataTable({
                   {headers.map((header) => (
                     <TableCell
                       key={header.key}
-                      style={{ color: '#011936', borderBottom: 'none' }}
+                      sx={{
+                        width: 'auto',
+                        minWidth: 100,
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        '@media (max-width: 800px)': {
+                          display: header.key === 'id' ? 'none' : 'table-cell',
+                        },
+                      }}
                     >
                       {urlHeaders.includes(header.key) ? (
                         <img
@@ -252,7 +276,9 @@ export default function DataTable({
                           alt={row[header.key]}
                         />
                       ) : (
-                        row[header.key]
+                        <OverflowTooltip
+                          children={row[header.key]}
+                        ></OverflowTooltip>
                       )}
                     </TableCell>
                   ))}

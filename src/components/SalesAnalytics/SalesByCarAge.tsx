@@ -31,19 +31,24 @@ export default function SalesByCarYear({ salesData }: Props) {
     <div
       style={{
         display: 'flex',
-        height: '180px',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: 'auto',
         margin: '10px 30px',
-        overflowX: 'hidden',
-        overflowY: 'hidden',
+        overflow: 'hidden',
+        width: '100%',
       }}
     >
-      <p>Sales by Car Year</p>
-      <ResponsiveContainer width="100%" height="100%">
+      <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>
+        Sales by Model Year
+      </h3>
+
+      <ResponsiveContainer width="100%" height={180}>
         <BarChart
           data={
             formattedData.length
               ? formattedData
-              : [{ year: new Date().getFullYear(), count: 0 }]
+              : [{ year: new Date().toLocaleDateString(), count: 0 }]
           }
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >

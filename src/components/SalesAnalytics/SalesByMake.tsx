@@ -25,14 +25,19 @@ export default function SalesByMake({ salesData }: Props) {
     <div
       style={{
         display: 'flex',
-        height: '180px',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: 'auto',
         margin: '10px 30px',
-        overflowX: 'hidden',
-        overflowY: 'hidden',
+        overflow: 'hidden',
+        width: '100%',
       }}
     >
-      <p>Sales by Make</p>
-      <ResponsiveContainer width="100%" height="100%">
+      <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>
+        Sales by Make
+      </h3>
+
+      <ResponsiveContainer width="100%" height={180}>
         <PieChart>
           <Pie
             data={formattedData}

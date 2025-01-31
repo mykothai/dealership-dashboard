@@ -32,19 +32,24 @@ export default function SalesByDateChart({ salesData }: SalesByDateChartProps) {
     <div
       style={{
         display: 'flex',
-        height: '180px',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: 'auto',
         margin: '10px 30px',
-        overflowX: 'hidden',
-        overflowY: 'hidden',
+        overflow: 'hidden',
+        width: '100%',
       }}
     >
-      <div>Sales by Date</div>
-      <ResponsiveContainer width="100%" height="100%">
+      <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>
+        Sales by Date
+      </h3>
+
+      <ResponsiveContainer width="100%" height={180}>
         <LineChart
           data={
             formattedData.length
               ? formattedData
-              : [{ date: new Date(), count: 0 }]
+              : [{ date: new Date().toLocaleDateString(), count: 0 }]
           }
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >

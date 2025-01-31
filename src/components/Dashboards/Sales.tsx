@@ -12,6 +12,7 @@ import SalesByMake from '@components/SalesAnalytics/SalesByMake'
 import SalesByPrice from '@components/SalesAnalytics/SalesByPrice'
 import SalesByMileage from '@components/SalesAnalytics/SalesByMileage'
 import Loading from '@components/Loading/loading'
+import './Sales.css'
 
 export interface Sale {
   user: number
@@ -96,8 +97,6 @@ export default function SaleDashboard() {
       }
     } catch (error) {
       console.error(`Failed to delete sale ${id}`, error)
-
-      console.error(`Failed to delete sale ${id}`, error)
     }
   }
 
@@ -106,16 +105,7 @@ export default function SaleDashboard() {
       {loading ? (
         <Loading />
       ) : (
-        <div
-          style={{
-            marginLeft: '200px',
-            top: ' 0',
-            bottom: ' 0',
-            left: ' 0',
-            position: 'fixed',
-            overflowY: 'scroll',
-          }}
-        >
+        <div className="sales-wrapper">
           <div>
             <h1 style={{ justifyContent: 'left', margin: '10px 20px 20px' }}>
               Summary
@@ -124,7 +114,10 @@ export default function SaleDashboard() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                gap: '20px',
+                justifyContent: 'center',
+                alignItems: 'start',
               }}
             >
               <SalesByDateChart salesData={sales} />
@@ -136,11 +129,10 @@ export default function SaleDashboard() {
             </div>
           </div>
 
+          {/* Sales Table */}
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(1, 2fr)',
-              maxHeight: '50%',
+              marginTop: '30px',
             }}
           >
             <h1 style={{ justifyContent: 'left', margin: '0 0 10px 20px' }}>
@@ -148,7 +140,8 @@ export default function SaleDashboard() {
             </h1>
             <div
               style={{
-                overflowX: 'hidden',
+                overflowX: 'auto',
+                maxWidth: '100%',
               }}
             >
               <SalesTable data={sales} onDelete={handleDelete} />

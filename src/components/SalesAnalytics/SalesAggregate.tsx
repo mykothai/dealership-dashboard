@@ -44,7 +44,9 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
     },
     {
       title: 'Avg. Profit/Car',
-      description: totalCarsSold ? `${formatCurrency(totalProfits / totalCarsSold)}` : 0,
+      description: totalCarsSold
+        ? `${formatCurrency(totalProfits / totalCarsSold)}`
+        : 0,
     },
     {
       title: 'Most Sales',
@@ -113,11 +115,9 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
       sx={{
         width: '100%',
         display: 'grid',
-        gridTemplateColumns: 'auto auto auto auto auto',
-        gap: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        alignItems: 'start',
+        justifyItems: 'center',
       }}
     >
       {cards.map((card, index) => (
@@ -125,9 +125,9 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
           key={index}
           sx={{
             width: 200,
-            height: '100%',
             borderRadius: '8px',
             backgroundColor: '#011936',
+            margin: '10px',
           }}
         >
           <CardContent sx={{ height: '100%' }}>

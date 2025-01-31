@@ -35,20 +35,25 @@ export default function SalesByMileage({ salesData }: Props) {
     <div
       style={{
         display: 'flex',
-        height: '180px',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: 'auto',
         margin: '10px 30px',
-        overflowX: 'hidden',
-        overflowY: 'hidden',
+        overflow: 'hidden',
+        width: '100%',
       }}
     >
-      <p>Sales by Mileage</p>
-      <ResponsiveContainer width="100%" height="100%">
+      <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>
+        Sales by Mileage
+      </h3>
+
+      <ResponsiveContainer width="100%" height={180}>
         <BarChart
           data={formattedData}
           margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >
-          <XAxis dataKey="milage"  />
-          <YAxis dataKey="count"  allowDecimals={false} />
+          <XAxis dataKey="milage" />
+          <YAxis dataKey="count" allowDecimals={false} />
           <Tooltip />
           <Bar dataKey="count" fill="#8dd1e1" />
         </BarChart>
