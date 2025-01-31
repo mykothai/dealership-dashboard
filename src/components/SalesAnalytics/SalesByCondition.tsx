@@ -32,7 +32,6 @@ export default function SalesByCondition({ salesData }: Props) {
         height: 'auto',
         margin: '10px 30px',
         overflow: 'hidden',
-        width: '100%',
       }}
     >
       <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>
