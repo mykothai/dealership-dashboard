@@ -20,6 +20,7 @@ import { MdDeleteForever } from 'react-icons/md'
 import { formatCurrency, getComparator } from '@helpers'
 import { styled } from '@mui/material/styles'
 import './DataTable.css'
+import OverflowTooltip from '@components/OverflowTooltip'
 
 interface SalesTableProps {
   data: SalesData[]
@@ -135,16 +136,33 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
                   style={{ cursor: 'pointer' }}
                 >
                   <StyledTableCell>
-                    {new Date(row.date).toLocaleDateString()}
+                    <OverflowTooltip
+                      children={new Date(row.date).toLocaleDateString()}
+                    ></OverflowTooltip>
                   </StyledTableCell>
-                  <StyledTableCell>{`${row.vehicle.year} ${row.vehicle.make} ${row.vehicle.model}`}</StyledTableCell>
-                  <StyledTableCell>{`${formatCurrency(
-                    row.selling_price
-                  )}`}</StyledTableCell>
-                  <StyledTableCell>{`${formatCurrency(
-                    row.selling_price - row.vehicle.price
-                  )}`}</StyledTableCell>
-                  <StyledTableCell>{`${row.sales_rep.first_name} ${row.sales_rep.last_name}`}</StyledTableCell>
+                  <StyledTableCell>
+                    <OverflowTooltip
+                      children={`${row.vehicle.year} ${row.vehicle.make} ${row.vehicle.model}`}
+                    ></OverflowTooltip>
+                  </StyledTableCell>
+
+                  <StyledTableCell>
+                    <OverflowTooltip
+                      children={`${formatCurrency(row.selling_price)}`}
+                    ></OverflowTooltip>
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    <OverflowTooltip
+                      children={`${formatCurrency(
+                        row.selling_price - row.vehicle.price
+                      )}`}
+                    ></OverflowTooltip>
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    <OverflowTooltip
+                      children={`${row.sales_rep.first_name} ${row.sales_rep.last_name}`}
+                    ></OverflowTooltip>
+                  </StyledTableCell>
                   <StyledTableCell>
                     <IconButton
                       onClick={(e) => {
@@ -267,6 +285,11 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 const StyledTableCell = styled(TableCell)(() => ({
   borderBottom: 'none',
+  width: 'auto',
+  minWidth: 100,
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 }))
 
 const StyledTableHeaderCell = styled(TableCell)(() => ({
