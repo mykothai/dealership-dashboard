@@ -107,19 +107,9 @@ export default function SaleDashboard() {
       ) : (
         <div className="sales-wrapper">
           <div>
-            <h1 style={{ justifyContent: 'left', margin: '10px 20px 20px' }}>
-              Summary
-            </h1>
+            <h1>Summary</h1>
             <SalesAggregate data={sales} />
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-                gap: '20px',
-                justifyContent: 'center',
-                alignItems: 'start',
-              }}
-            >
+            <div className="sales-charts">
               <SalesByDateChart salesData={sales} />
               <SalesByCarYear salesData={sales} />
               <SalesByCondition salesData={sales} />
@@ -130,20 +120,9 @@ export default function SaleDashboard() {
           </div>
 
           {/* Sales Table */}
-          <div
-            style={{
-              marginTop: '30px',
-            }}
-          >
-            <h1 style={{ justifyContent: 'left', margin: '0 0 10px 20px' }}>
-              All Sales
-            </h1>
-            <div
-              style={{
-                overflowX: 'auto',
-                maxWidth: '100%',
-              }}
-            >
+          <div>
+            <h1>All Sales</h1>
+            <div className="sales-table-wrapper">
               <SalesTable data={sales} onDelete={handleDelete} />
             </div>
           </div>

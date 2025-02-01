@@ -1,17 +1,9 @@
-Table {
-  table-layout: fixed;
-  width: 100px;
-  min-width: 100px;
-}
-
-.table-wrapper {
-  top: 0;
+div .table-wrapper {
   bottom: 0;
   left: 0;
-  position: fixed;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  margin-left: 200px; /* same width as sidebar */
+  margin: 0;
+  overflow: hidden;
+  position: relative;
 }
 
 .table-wrapper .empty-table {

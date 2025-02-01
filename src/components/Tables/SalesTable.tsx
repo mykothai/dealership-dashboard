@@ -19,7 +19,7 @@ import { SalesData } from '@components/Sales/SaleDashboard'
 import { MdDeleteForever } from 'react-icons/md'
 import { formatCurrency, getComparator } from '@helpers'
 import { styled } from '@mui/material/styles'
-import './DataTable.css'
+import './SalesTable.css'
 import OverflowTooltip from '@components/OverflowTooltip'
 
 interface SalesTableProps {
@@ -66,7 +66,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
   }
 
   return (
-    <div>
+    <div className="table-wrapper">
       <TableContainer>
         <Table size="small">
           <TableHead>
@@ -214,7 +214,6 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
         aria-modal
         open={!!selectedRow}
         onClose={handleCloseDetails}
-        // slotProps={{ paper: { style: { maxWidth: '500px' } } }}
         className="modal"
       >
         <DialogTitle>Sale Details</DialogTitle>

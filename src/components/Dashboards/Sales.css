@@ -3,14 +3,24 @@ div .sales-wrapper {
   top: 0;
   bottom: 0;
   left: 0;
-  position: fixed;
-  overflow-y: scroll;
-  padding: 20px;
-  width: 88%;
 }
 
 @media (max-width: 800px) {
   div .sales-wrapper {
     margin-left: 0;
   }
+}
+
+div .sales-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  overflow: auto;
+}
+
+div .sales-table-wrapper {
+  max-width: 100%;
 }
