@@ -55,3 +55,11 @@ export function formatCurrency(amount: number): string {
     currency: 'USD',
   }).format(amount)
 }
+
+export function calculatePriceRange(
+  price: number,
+  numerator: number = 10000,
+  multiplier: number = 10
+): number {
+  return Math.floor(price / numerator) * multiplier
+}

@@ -8,6 +8,8 @@ import {
 } from 'recharts'
 import { useMemo } from 'react'
 import { SalesData } from '@components/Dashboards/Sales'
+import { CHART_COLORS } from '@constants'
+import NoDataMessage from '@components/NoDataAvailable'
 
 interface SalesByDateChartProps {
   salesData: SalesData[]
@@ -43,26 +45,31 @@ export default function SalesByDateChart({ salesData }: SalesByDateChartProps) {
         Sales by Date
       </h3>
 
-      <ResponsiveContainer width="100%" height={180}>
-        <LineChart
-          data={
-            formattedData.length
-              ? formattedData
-              : [{ date: new Date().toLocaleDateString(), count: 0 }]
-          }
-          margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
-        >
-          <XAxis dataKey="date" />
-          <YAxis dataKey="count" allowDecimals={false} />
-          <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="count"
-            stroke="#8884d8"
-            strokeWidth={2}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+      {formattedData.length ? (
+        <ResponsiveContainer width="100%" height={180}>
+          <LineChart
+            data={
+              formattedData.length
+                ? formattedData
+                : [{ date: new Date().toLocaleDateString(), count: 0 }]
+            }
+            margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
+          >
+            <XAxis dataKey="date" />
+            <YAxis dataKey="count" allowDecimals={false} />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="count"
+              stroke={CHART_COLORS[0]}
+              strokeWidth={2}
+              dot={{ strokeWidth: 5, r: 1.5 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      ) : (
+        <NoDataMessage />
+      )}
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import { Tooltip, ResponsiveContainer, Cell, Pie, PieChart } from 'recharts'
-import { PIE_CHART_COLORS } from '@constants'
+import { CHART_COLORS } from '@constants'
 import { useMemo } from 'react'
 import { SalesData } from '@components/Dashboards/Sales'
+import NoDataMessage from '@components/NoDataAvailable'
 
 interface Props {
   salesData: SalesData[]
@@ -36,27 +37,31 @@ export default function SalesByMake({ salesData }: Props) {
         Sales by Make
       </h3>
 
-      <ResponsiveContainer width="100%" height={180}>
-        <PieChart>
-          <Pie
-            data={formattedData}
-            dataKey="count"
-            nameKey="make"
-            outerRadius={60}
-            fill="#ffc658"
-            label={({ make }) => `${make}`}
-            labelLine={false}
-          >
-            {formattedData.map((_entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={PIE_CHART_COLORS[index % PIE_CHART_COLORS.length]}
-              />
-            ))}
+      {formattedData.length ? (
+        <ResponsiveContainer width="100%" height={180}>
+          <PieChart>
+            <Pie
+              data={formattedData}
+              dataKey="count"
+              nameKey="make"
+              outerRadius={60}
+              fill="#ffc658"
+              label={({ make }) => `${make}`}
+              labelLine={false}
+            >
+              {formattedData.map((_entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={CHART_COLORS[index % CHART_COLORS.length]}
+                />
+              ))}
+            </Pie>
             <Tooltip />
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+          </PieChart>
+        </ResponsiveContainer>
+      ) : (
+        <NoDataMessage />
+      )}
     </div>
   )
 }
