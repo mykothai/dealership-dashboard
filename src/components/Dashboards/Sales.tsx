@@ -5,7 +5,6 @@ import SalesTable from '@components/Tables/SalesTable'
 import { User } from '@components/Dashboards/Users'
 import { toast } from 'react-toastify'
 import SalesAggregate from '@components/SalesAnalytics/SalesAggregate'
-import SalesByCarYear from '@components/SalesAnalytics/SalesByCarAge'
 import SalesByCondition from '@components/SalesAnalytics/SalesByCondition'
 import SalesByDateChart from '@components/SalesAnalytics/SalesByDate'
 import SalesByMake from '@components/SalesAnalytics/SalesByMake'
@@ -13,6 +12,9 @@ import SalesByPrice from '@components/SalesAnalytics/SalesByPrice'
 import SalesByMileage from '@components/SalesAnalytics/SalesByMileage'
 import Loading from '@components/Loading/loading'
 import './Sales.css'
+import SalesByModelYear from '@components/SalesAnalytics/SalesByModelYear'
+import SalesBySalesRep from '@components/SalesAnalytics/SalesBySalesRep'
+import SalesByAvgPrice from '@components/SalesAnalytics/SalesByAvgPrice'
 
 export interface Sale {
   user: number
@@ -111,11 +113,13 @@ export default function SaleDashboard() {
             <SalesAggregate data={sales} />
             <div className="sales-charts">
               <SalesByDateChart salesData={sales} />
-              <SalesByCarYear salesData={sales} />
+              <SalesByModelYear salesData={sales} />
               <SalesByCondition salesData={sales} />
               <SalesByMileage salesData={sales} />
               <SalesByPrice salesData={sales} />
               <SalesByMake salesData={sales} />
+              <SalesByMake salesData={sales} />
+              <SalesBySalesRep salesData={sales} />
             </div>
           </div>
 

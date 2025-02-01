@@ -17,7 +17,7 @@ interface Props {
   salesData: SalesData[]
 }
 
-export default function SalesByAvgPriceOverTime({ salesData }: Props) {
+export default function SalesByAvgPrice({ salesData }: Props) {
   const formattedData = useMemo(() => {
     const dataByDate = salesData.reduce((acc, sale) => {
       const date = new Date(sale.date).toISOString().split('T')[0]
