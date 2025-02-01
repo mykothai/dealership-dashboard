@@ -27,6 +27,7 @@ import './DataTable.css'
 import SellingDialog from '@components/Dialogs/SellingDialog'
 import { styled } from '@mui/material/styles'
 import OverflowTooltip from '@components/OverflowTooltip'
+import NoDataMessage from '@components/NoDataAvailable'
 
 interface Headers {
   key: string
@@ -321,7 +322,7 @@ export default function DataTable({
                     whiteSpace: 'nowrap',
                   }}
                 >
-                  No Results
+                  <NoDataMessage message={'No Results'}/>
                 </TableCell>
               </TableRow>
             )}

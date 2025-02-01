@@ -9,7 +9,7 @@ Table {
   font: bold;
 }
 
-.table-wrapper {
+div .table-wrapper {
   top: 0;
   bottom: 0;
   left: 0;
@@ -21,7 +21,7 @@ Table {
 }
 
 @media (max-width: 800px) {
-  .table-wrapper {
+  div .table-wrapper {
     margin-left: 0;
   }
 }
