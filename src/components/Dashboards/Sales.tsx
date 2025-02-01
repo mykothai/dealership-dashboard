@@ -11,10 +11,9 @@ import SalesByMake from '@components/SalesAnalytics/SalesByMake'
 import SalesByPrice from '@components/SalesAnalytics/SalesByPrice'
 import SalesByMileage from '@components/SalesAnalytics/SalesByMileage'
 import Loading from '@components/Loading/loading'
-import './Sales.css'
 import SalesByModelYear from '@components/SalesAnalytics/SalesByModelYear'
 import SalesBySalesRep from '@components/SalesAnalytics/SalesBySalesRep'
-import SalesByAvgPrice from '@components/SalesAnalytics/SalesByAvgPrice'
+import './Sales.css'
 
 export interface Sale {
   user: number
@@ -113,20 +112,18 @@ export default function SaleDashboard() {
             <SalesAggregate data={sales} />
             <div className="sales-charts">
               <SalesByDateChart salesData={sales} />
-              <SalesByModelYear salesData={sales} />
               <SalesByCondition salesData={sales} />
+              <SalesByModelYear salesData={sales} />
               <SalesByMileage salesData={sales} />
               <SalesByPrice salesData={sales} />
-              <SalesByMake salesData={sales} />
               <SalesByMake salesData={sales} />
               <SalesBySalesRep salesData={sales} />
             </div>
           </div>
 
-          {/* Sales Table */}
-          <div>
+          <div className="sales-table-wrapper">
             <h1>All Sales</h1>
-            <div className="sales-table-wrapper">
+            <div>
               <SalesTable data={sales} onDelete={handleDelete} />
             </div>
           </div>

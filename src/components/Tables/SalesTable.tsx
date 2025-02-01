@@ -15,12 +15,12 @@ import {
   TableSortLabel,
   DialogActions,
 } from '@mui/material'
-import { SalesData } from '@components/Sales/SaleDashboard'
 import { MdDeleteForever } from 'react-icons/md'
 import { formatCurrency, getComparator } from '@helpers'
 import { styled } from '@mui/material/styles'
-import './SalesTable.css'
+import { SalesData } from '@components/Dashboards/Sales'
 import OverflowTooltip from '@components/OverflowTooltip'
+import './SalesTable.css'
 
 interface SalesTableProps {
   data: SalesData[]
@@ -66,7 +66,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
   }
 
   return (
-    <div className="table-wrapper">
+    <div>
       <TableContainer>
         <Table size="small">
           <TableHead>
