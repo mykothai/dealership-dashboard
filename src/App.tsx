@@ -10,6 +10,7 @@ import UserDashboard, { User } from '@components/Dashboards/Users'
 import VehicleDashboard from '@components/Dashboards/Vehicles'
 import SidebarMenu from '@components/Menu/SideMenu'
 import Loading from '@components/Loading/loading'
+import TopAppBar from '@components/Menu/TopAppBar'
 
 function App() {
   // use user's email validated against existing users as a 'token'
@@ -63,6 +64,7 @@ function App() {
       <ToastContainer position="top-center" autoClose={2000} />
       <Router>
         {isLoggedIn && <SidebarMenu handleLogout={handleLogout} />}
+        {isLoggedIn && <TopAppBar handleLogout={handleLogout} />}
         {loading ? (
           <Loading />
         ) : (

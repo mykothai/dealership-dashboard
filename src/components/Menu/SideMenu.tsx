@@ -4,11 +4,7 @@ import { useEffect, useState } from 'react'
 import { User } from '@components/Dashboards/Users'
 import { Button } from '@mui/material'
 import './SideMenu.css'
-
-interface MenuOption {
-  label: string
-  path: string
-}
+import { menuOptions } from '@constants'
 
 export default function SidebarMenu({ handleLogout }) {
   const [session, setSession] = useState<User | null>(null)
@@ -21,27 +17,6 @@ export default function SidebarMenu({ handleLogout }) {
       setSession(JSON.parse(savedSession))
     }
   }, [])
-
-  // Define the menu options based on the role
-  const menuOptions: { [key: string]: MenuOption[] } = {
-    principal: [
-      { label: 'Sales Dashboard', path: '/sales' },
-      { label: 'User Dashboard', path: '/users' },
-      { label: 'Vehicle Dashboard', path: '/vehicles' },
-    ],
-    admin: [
-      { label: 'User Dashboard', path: '/users' },
-      { label: 'Vehicle Dashboard', path: '/vehicles' },
-    ],
-    manager: [
-      { label: 'Sales Dashboard', path: '/sales' },
-      { label: 'Vehicle Dashboard', path: '/vehicles' },
-    ],
-    'sales-rep': [
-      { label: 'Sales Dashboard', path: '/sales' },
-      { label: 'Vehicle Dashboard', path: '/vehicles' },
-    ],
-  }
 
   const availableOptions = session ? menuOptions[session.role] : []
 
@@ -60,7 +35,9 @@ export default function SidebarMenu({ handleLogout }) {
         <nav className="content">
           {availableOptions.map((option) => (
             <Button
-              className={`items ${activePath === option.path ? 'active' : 'dormant'}`}
+              className={`items ${
+                activePath === option.path ? 'active' : 'dormant'
+              }`}
               key={option.path}
               onClick={() => handleNavigation(option.path)}
             >
@@ -68,7 +45,8 @@ export default function SidebarMenu({ handleLogout }) {
             </Button>
           ))}
           <div className="logout">
-            <Button className="logout button"
+            <Button
+              className="logout button"
               onClick={() => {
                 onLogout()
                 navigate('/')

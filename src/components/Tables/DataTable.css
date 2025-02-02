@@ -23,6 +23,7 @@ div .table-wrapper {
 @media (max-width: 800px) {
   div .table-wrapper {
     margin-left: 0;
+    margin-top: 50px;
   }
 }
 

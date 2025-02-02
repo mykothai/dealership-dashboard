@@ -1,0 +1,33 @@
+.topbar {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #011936;
+  min-width: 300px;
+}
+
+@media (min-width: 800px) {
+  .topbar {
+    display: none;
+  }
+}
+
+.items.active {
+  font-weight: bold;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  margin: 0 3px 0 3px;
+}
+
+.items.dormant {
+  color: white;
+  font-weight: normal;
+  margin: 0 3px 0 3px;
+
+  &:hover {
+    background-color: #0056b3;
+    font-weight: bold;
+  }
+}
