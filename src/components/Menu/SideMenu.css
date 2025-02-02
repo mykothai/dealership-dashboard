@@ -35,17 +35,22 @@
 .sidebar-items.active {
   background-color: #5865f2;
   color: white;
-  margin: 0 15px 0 15px;
+  margin: 5px 15px 5px 15px;
   text-transform: initial;
 }
 
 .sidebar-items.dormant {
   color: #2c2f33;
-  margin: 0 15px 0 15px;
+  margin: 5px 15px 5px 15px;
   text-transform: initial;
   &:hover {
     background-color: #5865f2;
     color: white;
+    .sidebar-icons {
+      color: white;
+      font-size: x-large;
+      padding: 10px;
+    }
   }
 }
 
@@ -71,5 +76,5 @@
 
 .sidebar-icons {
   font-size: x-large;
-  padding: 10px
+  padding: 10px;
 }
