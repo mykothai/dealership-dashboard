@@ -67,7 +67,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
 
   return (
     <div>
-      <TableContainer className='table-container'>
+      <TableContainer className="table-container">
         <Table size="small">
           <TableHead>
             <TableRow>
@@ -202,12 +202,6 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
           setRowsPerPage(parseInt(e.target.value, 10))
         }
         rowsPerPageOptions={[10, 25, 50, 100]}
-        sx={{
-          position: 'sticky',
-          left: 0,
-          bottom: 0,
-          zIndex: 2,
-        }}
       />
 
       <Dialog
