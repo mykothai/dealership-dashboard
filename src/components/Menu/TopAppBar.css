@@ -23,11 +23,17 @@
 }
 
 .items.dormant {
-  color: black;
+  color: white;
   margin: 0 3px 0 3px;
   text-transform: initial;
   &:hover {
     background-color: #2c2f33;
     color: white;
   }
+}
+
+.sidebar-icons {
+  font-size: x-large;
+  padding: 10px;
+  color: white;
 }

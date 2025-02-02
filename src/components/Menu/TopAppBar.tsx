@@ -12,7 +12,7 @@ import { TbLogout } from 'react-icons/tb'
 import { MENU_OPTIONS } from '@constants'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
-import TimeToLeaveOutlinedIcon from '@mui/icons-material/TimeToLeaveOutlined'
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave'
 import './TopAppBar.css'
 
 export default function TopAppBar({ handleLogout }) {
@@ -22,11 +22,9 @@ export default function TopAppBar({ handleLogout }) {
   const navigate = useNavigate()
 
   const iconMapping: Record<string, JSX.Element> = {
-    Sales: <RequestQuoteIcon sx={{ fontSize: 'x-large', color: '#FFF' }} />,
-    Users: <PeopleAltIcon sx={{ fontSize: 'x-large', color: '#FFF' }} />,
-    Vehicles: (
-      <TimeToLeaveOutlinedIcon sx={{ fontSize: 'x-large', color: '#FFF' }} />
-    ),
+    Sales: <RequestQuoteIcon className="sidebar-icons" />,
+    Users: <PeopleAltIcon className="sidebar-icons" />,
+    Vehicles: <TimeToLeaveIcon className="sidebar-icons" />,
   }
 
   React.useEffect(() => {
