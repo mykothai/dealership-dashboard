@@ -30,7 +30,8 @@ export default function SalesByMake({ salesData }: Props) {
         flexDirection: 'column',
         alignItems: 'center',
         height: 'auto',
-        margin: '10px 30px',
+        padding: '10px',
+        margin: '10px',
         overflow: 'hidden',
         backgroundColor: 'white',
         borderRadius: '10px',
@@ -71,6 +72,6 @@ export default function SalesByMake({ salesData }: Props) {
       ) : (
         <NoDataMessage />
       )}
-   </Card>
+    </Card>
   )
 }

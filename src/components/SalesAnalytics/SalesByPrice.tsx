@@ -41,7 +41,8 @@ export default function SalesByPrice({ salesData }: Props) {
         flexDirection: 'column',
         alignItems: 'center',
         height: 'auto',
-        margin: '10px 30px',
+        padding: '10px',
+        margin: '10px',
         overflow: 'hidden',
         backgroundColor: 'white',
         borderRadius: '10px',
@@ -56,7 +57,7 @@ export default function SalesByPrice({ salesData }: Props) {
       >
         Sales by Price
       </Typography>
-      
+
       {formattedData.length ? (
         <ResponsiveContainer width="100%" height={180}>
           <BarChart
@@ -78,6 +79,6 @@ export default function SalesByPrice({ salesData }: Props) {
       ) : (
         <NoDataMessage />
       )}
-  </Card>
+    </Card>
   )
 }

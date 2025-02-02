@@ -112,8 +112,8 @@ export default function SaleDashboard() {
             <Typography variant="h4" margin={'10px 0'}>
               Sales Summary
             </Typography>
-            <SalesAggregate data={sales} />
             <div className="sales-charts">
+              <SalesAggregate data={sales} />
               <SalesByDateChart salesData={sales} />
               <SalesByCondition salesData={sales} />
               <SalesByModelYear salesData={sales} />
@@ -125,7 +125,7 @@ export default function SaleDashboard() {
           </div>
 
           <div className="sales-table-wrapper">
-            <Typography variant="h4" margin={'10px 0'}>
+            <Typography variant="h4" margin={'20px 0'}>
               All Sales
             </Typography>
             <div>

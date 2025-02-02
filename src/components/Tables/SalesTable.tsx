@@ -14,12 +14,13 @@ import {
   TablePagination,
   TableSortLabel,
   DialogActions,
+  Typography,
 } from '@mui/material'
 import { MdDeleteForever } from 'react-icons/md'
 import { formatCurrency, getComparator } from '@helpers'
 import { styled } from '@mui/material/styles'
 import { SalesData } from '@components/Dashboards/Sales'
-import OverflowTooltip from '@components/OverflowTooltip'
+import OverflowTooltip from '@components/Status/OverflowTooltip'
 import './SalesTable.css'
 
 interface SalesTableProps {
@@ -210,7 +211,11 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
         onClose={handleCloseDetails}
         className="modal"
       >
-        <DialogTitle>Sale Details</DialogTitle>
+        <DialogTitle>
+          <Typography variant="h5" sx={{marginTop:'10px'}}>
+            Details
+          </Typography>
+        </DialogTitle>
         <DialogContent>
           {selectedRow && (
             <div>

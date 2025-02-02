@@ -37,9 +37,13 @@
   color: white;
   margin: 5px 15px 5px 15px;
   text-transform: initial;
+  justify-content: flex-start;
+  font-size: 18px;
 }
 
 .sidebar-items.dormant {
+  justify-content: flex-start;
+  font-size: 18px;
   color: #2c2f33;
   margin: 5px 15px 5px 15px;
   text-transform: initial;

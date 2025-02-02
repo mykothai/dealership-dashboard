@@ -6,6 +6,7 @@ import {
   DialogActions,
   TextField,
   Button,
+  Typography,
 } from '@mui/material'
 import './SellingDialog.css'
 
@@ -24,8 +25,12 @@ export default function SellingDialog({ open, saleData, onCancel, onSave }) {
   }
 
   return (
-    <Dialog aria-modal open={open} onClose={onCancel}>
-      <DialogTitle>Sell Vehicle</DialogTitle>
+    <Dialog aria-modal className="modal" open={open} onClose={onCancel}>
+      <DialogTitle>
+        <Typography variant="h5" sx={{ marginTop: '10px' }}>
+          Sell Vehicle
+        </Typography>
+      </DialogTitle>
       <DialogContent>
         <TextField
           label="User"

@@ -48,10 +48,10 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
         ? `${formatCurrency(totalProfits / totalCarsSold)}`
         : 0,
     },
-    {
-      title: 'Most Sales',
-      metric: repName ? repName : '-',
-    },
+    // {
+    //   title: 'Most Sales',
+    //   metric: repName ? repName : '-',
+    // },
     {
       title: 'Best Selling Make',
       metric: highestSellingMake ? highestSellingMake : '-',
@@ -113,7 +113,6 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
   return (
     <Box
       sx={{
-        width: '100%',
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
         alignItems: 'start',
@@ -124,7 +123,7 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
         <Card
           key={index}
           sx={{
-            width: 200,
+            width: '210px',
             borderRadius: '10px',
             backgroundColor: '#FFF',
             margin: '10px',
@@ -142,7 +141,7 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
             </Typography>
             <Typography
               variant="h5"
-              align="center"
+              textAlign="center"
               color="#5865f2"
               fontWeight="bold"
             >

@@ -25,7 +25,7 @@ import { getComparator } from '@helpers'
 import './DataTable.css'
 import SellingDialog from '@components/Dialogs/SellingDialog'
 import { styled } from '@mui/material/styles'
-import OverflowTooltip from '@components/OverflowTooltip'
+import OverflowTooltip from '@components/Status/OverflowTooltip'
 import NoDataMessage from '@components/Status/NoDataAvailable'
 
 interface Headers {
@@ -336,7 +336,11 @@ export default function DataTable({
         open={!!editRow}
         onClose={handleCancelEdit}
       >
-        <DialogTitle>Edit</DialogTitle>
+        <DialogTitle>
+          <Typography variant="h5" sx={{ marginTop: '10px' }}>
+            Edit Vehicle
+          </Typography>
+        </DialogTitle>
 
         <DialogContent>
           {headers.map((header) => (
@@ -370,7 +374,11 @@ export default function DataTable({
         open={!!addRow}
         onClose={handleCancelEdit}
       >
-        <DialogTitle>Add new vehicle</DialogTitle>
+        <DialogTitle>
+          <Typography variant="h5" sx={{ marginTop: '10px' }}>
+            Add New Vehicle
+          </Typography>
+        </DialogTitle>
 
         <DialogContent>
           {headers.map(
