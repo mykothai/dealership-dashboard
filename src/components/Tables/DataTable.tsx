@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogTitle,
   TableSortLabel,
+  Typography,
 } from '@mui/material'
 import { MdAdd, MdEdit } from 'react-icons/md'
 import { MdDeleteForever } from 'react-icons/md'
@@ -25,7 +26,7 @@ import './DataTable.css'
 import SellingDialog from '@components/Dialogs/SellingDialog'
 import { styled } from '@mui/material/styles'
 import OverflowTooltip from '@components/OverflowTooltip'
-import NoDataMessage from '@components/NoDataAvailable'
+import NoDataMessage from '@components/Status/NoDataAvailable'
 
 interface Headers {
   key: string
@@ -33,6 +34,7 @@ interface Headers {
 }
 
 interface DataTableProps {
+  title: string
   headers: Headers[]
   data: Record<string, any>[]
   onDelete?: Record<string, any>
@@ -43,6 +45,7 @@ interface DataTableProps {
 }
 
 export default function DataTable({
+  title,
   headers,
   data,
   onAdd,
@@ -163,6 +166,9 @@ export default function DataTable({
 
   return (
     <div className="table-wrapper">
+      <Typography variant="h4" margin={'10px 0 0'}>
+        {title}
+      </Typography>
       <div className="table-header">
         {onAdd && (
           <Button

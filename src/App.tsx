@@ -1,5 +1,5 @@
 import LoginPage from '@components/Login/LoginPage'
-import NotFoundPage from '@components/NotFoundPage'
+import NotFoundPage from '@components/Status/NotFoundPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getAllUsers } from './api/UserApi'
@@ -9,8 +9,36 @@ import SaleDashboard from '@components/Dashboards/Sales'
 import UserDashboard, { User } from '@components/Dashboards/Users'
 import VehicleDashboard from '@components/Dashboards/Vehicles'
 import SidebarMenu from '@components/Menu/SideMenu'
-import Loading from '@components/Loading/loading'
+import Loading from '@components/Status/Loading'
 import TopAppBar from '@components/Menu/TopAppBar'
+import { createTheme, ThemeProvider } from '@mui/material'
+
+const theme = createTheme({
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Figtree, serif',
+        },
+        h1: {
+          display: 'flex',
+          placeItems: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          color: '#5865f2',
+        },
+        h4: {
+          textAlign: 'center',
+          color: '#5865f2',
+          fontWeight: 'bold',
+          fontStyle: 'light',
+          fontFamily: 'Figtree',
+          margin: '10px 0',
+        },
+      },
+    },
+  },
+})
 
 function App() {
   // use user's email validated against existing users as a 'token'
@@ -60,29 +88,31 @@ function App() {
   }
 
   return (
-    <div className="flex">
-      <ToastContainer position="top-center" autoClose={2000} />
-      <Router>
-        {isLoggedIn && <SidebarMenu handleLogout={handleLogout} />}
-        {isLoggedIn && <TopAppBar handleLogout={handleLogout} />}
-        {loading ? (
-          <Loading />
-        ) : (
-          <Routes>
-            <Route
-              path=""
-              element={
-                <LoginPage getUsers={getUsers} isLoggedIn={isLoggedIn} />
-              }
-            />
-            <Route path="/sales" element={<SaleDashboard />} />
-            <Route path="/users" element={<UserDashboard />} />
-            <Route path="/vehicles" element={<VehicleDashboard />} />
-            <Route path="/404" element={<NotFoundPage />} />
-          </Routes>
-        )}
-      </Router>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="flex">
+        <ToastContainer position="top-center" autoClose={2000} />
+        <Router>
+          {isLoggedIn && <SidebarMenu handleLogout={handleLogout} />}
+          {isLoggedIn && <TopAppBar handleLogout={handleLogout} />}
+          {loading ? (
+            <Loading />
+          ) : (
+            <Routes>
+              <Route
+                path=""
+                element={
+                  <LoginPage getUsers={getUsers} isLoggedIn={isLoggedIn} />
+                }
+              />
+              <Route path="/sales" element={<SaleDashboard />} />
+              <Route path="/users" element={<UserDashboard />} />
+              <Route path="/vehicles" element={<VehicleDashboard />} />
+              <Route path="/404" element={<NotFoundPage />} />
+            </Routes>
+          )}
+        </Router>
+      </div>
+    </ThemeProvider>
   )
 }
 

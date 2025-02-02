@@ -10,7 +10,7 @@ import DataTable from '@components/Tables/DataTable'
 import { sellVehicle } from '@api/SalesApi'
 import { toast } from 'react-toastify'
 import { Sale } from './Sales'
-import Loading from '@components/Loading/loading'
+import Loading from '@components/Status/Loading'
 
 export interface Vehicle {
   id: number
@@ -161,6 +161,7 @@ export default function VehicleDashboard() {
         <Loading />
       ) : (
         <DataTable
+          title={'Vehicle Inventory'}
           headers={headers}
           data={vehicles}
           onAdd={handleCreate}

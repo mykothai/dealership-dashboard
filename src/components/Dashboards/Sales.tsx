@@ -10,9 +10,10 @@ import SalesByDateChart from '@components/SalesAnalytics/SalesByDate'
 import SalesByMake from '@components/SalesAnalytics/SalesByMake'
 import SalesByPrice from '@components/SalesAnalytics/SalesByPrice'
 import SalesByMileage from '@components/SalesAnalytics/SalesByMileage'
-import Loading from '@components/Loading/loading'
+import Loading from '@components/Status/Loading'
 import SalesByModelYear from '@components/SalesAnalytics/SalesByModelYear'
 import SalesBySalesRep from '@components/SalesAnalytics/SalesBySalesRep'
+import { Typography } from '@mui/material'
 import './Sales.css'
 
 export interface Sale {
@@ -108,7 +109,9 @@ export default function SaleDashboard() {
       ) : (
         <div className="sales-wrapper">
           <div>
-            <h1>Summary</h1>
+            <Typography variant="h4" margin={'10px 0'}>
+              Sales Summary
+            </Typography>
             <SalesAggregate data={sales} />
             <div className="sales-charts">
               <SalesByDateChart salesData={sales} />
@@ -122,7 +125,9 @@ export default function SaleDashboard() {
           </div>
 
           <div className="sales-table-wrapper">
-            <h1>All Sales</h1>
+            <Typography variant="h4" margin={'10px 0'}>
+              All Sales
+            </Typography>
             <div>
               <SalesTable data={sales} onDelete={handleDelete} />
             </div>

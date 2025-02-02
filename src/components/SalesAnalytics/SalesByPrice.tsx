@@ -11,7 +11,7 @@ import { useMemo } from 'react'
 import { SalesData } from '@components/Dashboards/Sales'
 import { CHART_COLORS } from '@constants'
 import { calculatePriceRange } from '@helpers'
-import NoDataMessage from '@components/NoDataAvailable'
+import NoDataMessage from '@components/Status/NoDataAvailable'
 import { Card, Typography } from '@mui/material'
 
 interface Props {

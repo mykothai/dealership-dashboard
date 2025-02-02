@@ -3,7 +3,7 @@ import { CHART_COLORS } from '@constants'
 import { useMemo } from 'react'
 import { SalesData } from '@components/Dashboards/Sales'
 import { Card, Typography } from '@mui/material'
-import NoDataMessage from '@components/NoDataAvailable'
+import NoDataMessage from '@components/Status/NoDataAvailable'
 
 interface Props {
   salesData: SalesData[]

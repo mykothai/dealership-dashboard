@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { getAllUsers, updateUserById } from '@api/UserApi'
 import { UserRole } from '@constants'
-import Loading from '@components/Loading/loading'
+import Loading from '@components/Status/Loading'
 
 export interface User {
   id: number
@@ -74,7 +74,12 @@ export default function UserDashboard() {
       {loading ? (
         <Loading />
       ) : (
-        <DataTable headers={headers} data={users} onEdit={handleEdit} />
+        <DataTable
+          title={'Users'}
+          headers={headers}
+          data={users}
+          onEdit={handleEdit}
+        />
       )}
     </>
   )
