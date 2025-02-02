@@ -36,25 +36,25 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
   const cards = [
     {
       title: 'Total Cars Sold',
-      description: `${totalCarsSold}`,
+      metric: `${totalCarsSold}`,
     },
     {
       title: 'Total Profits',
-      description: `${formatCurrency(totalProfits)}`,
+      metric: `${formatCurrency(totalProfits)}`,
     },
     {
       title: 'Avg. Profit/Car',
-      description: totalCarsSold
+      metric: totalCarsSold
         ? `${formatCurrency(totalProfits / totalCarsSold)}`
         : 0,
     },
     {
       title: 'Most Sales',
-      description: repName ? repName : '-',
+      metric: repName ? repName : '-',
     },
     {
       title: 'Best Selling Make',
-      description: highestSellingMake ? highestSellingMake : '-',
+      metric: highestSellingMake ? highestSellingMake : '-',
     },
   ]
 
@@ -125,16 +125,17 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
           key={index}
           sx={{
             width: 200,
-            borderRadius: '8px',
-            backgroundColor: '#011936',
+            borderRadius: '10px',
+            backgroundColor: '#FFF',
             margin: '10px',
           }}
         >
           <CardContent sx={{ height: '100%' }}>
             <Typography
+              variant="caption"
               component="div"
               align="center"
-              color="white"
+              color="gray"
               margin={'8px 0'}
             >
               {card.title}
@@ -142,10 +143,10 @@ export default function SalesAggregate({ data }: SalesAggregateChartProps) {
             <Typography
               variant="h5"
               align="center"
-              color="white"
+              color="#5865f2"
               fontWeight="bold"
             >
-              {card.description}
+              {card.metric}
             </Typography>
           </CardContent>
         </Card>

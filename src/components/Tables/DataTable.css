@@ -4,8 +4,12 @@ Table {
   min-width: 100px;
 }
 
+.table-container {
+  border-radius: 10px;
+}
+
 .table-cell {
-  background-color: #011936;
+  background-color: #5865f2;
   font: bold;
 }
 
@@ -36,11 +40,11 @@ div .table-wrapper {
 
 .modal .save {
   color: white;
-  background-color: #011936;
+  background-color: #5865f2;
 }
 
 .modal .save:hover {
-  background-color: #0056b3;
+  background-color: #2c2f33;
 }
 
 .modal .cancel {
@@ -50,11 +54,11 @@ div .table-wrapper {
 
 .modal .cancel:hover {
   color: white;
-  background-color: #0056b3;
+  background-color: #2c2f33;
 }
 
 .action-icon {
-  color: #011936;
+  color: #5865f2;
 }
 
 .table-wrapper .empty-table {
@@ -67,13 +71,13 @@ div .table-wrapper {
 .add.button {
   color: white;
   font-weight: normal;
-  background-color: #011936;
+  background-color: #5865f2;
   margin: 0 25px 0 0;
   height: 50%;
   text-transform: inherit;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #2c2f33;
     font-weight: bold;
   }
 }

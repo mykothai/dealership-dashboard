@@ -9,7 +9,10 @@ import Tooltip from '@mui/material/Tooltip'
 import { User } from '@components/Dashboards/Users'
 import { useNavigate } from 'react-router-dom'
 import { TbLogout } from 'react-icons/tb'
-import { menuOptions } from '@constants'
+import { MENU_OPTIONS } from '@constants'
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import TimeToLeaveOutlinedIcon from '@mui/icons-material/TimeToLeaveOutlined'
 import './TopAppBar.css'
 
 export default function TopAppBar({ handleLogout }) {
@@ -18,6 +21,14 @@ export default function TopAppBar({ handleLogout }) {
 
   const navigate = useNavigate()
 
+  const iconMapping: Record<string, JSX.Element> = {
+    Sales: <RequestQuoteIcon sx={{ fontSize: 'x-large', color: '#FFF' }} />,
+    Users: <PeopleAltIcon sx={{ fontSize: 'x-large', color: '#FFF' }} />,
+    Vehicles: (
+      <TimeToLeaveOutlinedIcon sx={{ fontSize: 'x-large', color: '#FFF' }} />
+    ),
+  }
+
   React.useEffect(() => {
     const savedSession = localStorage.getItem('session')
     if (savedSession) {
@@ -25,7 +36,7 @@ export default function TopAppBar({ handleLogout }) {
     }
   }, [])
 
-  const availableOptions = session ? menuOptions[session.role] : []
+  const availableOptions = session ? MENU_OPTIONS[session.role] : []
 
   function handleNavigation(path: string) {
     setActivePath(path)
@@ -49,6 +60,7 @@ export default function TopAppBar({ handleLogout }) {
                 key={option.path}
                 onClick={() => handleNavigation(option.path)}
               >
+                {iconMapping[option.label] || null}
                 {option.label}
               </Button>
             ))}
@@ -65,7 +77,7 @@ export default function TopAppBar({ handleLogout }) {
                 color="inherit"
                 sx={{
                   '&:hover': {
-                    background: '#0056b3',
+                    background: '#2c2f33',
                   },
                 }}
               >

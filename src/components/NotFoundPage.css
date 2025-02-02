@@ -10,11 +10,11 @@
 .back.button {
   color: white;
   font-weight: normal;
-  background-color: #011936;
+  background-color: #5865f2;
 }
 
 .back.button:hover {
   color: white;
   font-weight: bold;
-  background-color: #0056b3;
+  background-color: #2c2f33;
 }

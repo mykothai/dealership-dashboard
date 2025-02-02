@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #fff;
+  background-color: #F7F8FA;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,7 +25,6 @@ body {
   justify-content: center;
   align-items: center;
   color: black;
-
 }
 
 h1 {
@@ -34,14 +33,14 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #011936;
+  color: #5865f2;
 }
 
 button {
-  background-color: #011936;
+  background-color: #5865f2;
   cursor: pointer;
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #2C2F33;
 }

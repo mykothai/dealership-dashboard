@@ -1,7 +1,5 @@
-Table {
-  table-layout: fixed;
-  width: 100px;
-  min-width: 100px;
+.table-container {
+  border-radius: 10px;
 }
 
 .table-wrapper {
@@ -12,6 +10,7 @@ Table {
   overflow-y: scroll;
   overflow-x: hidden;
   margin-left: 200px; /* same width as sidebar */
+  border-radius: 10px;
 }
 
 .table-wrapper .empty-table {

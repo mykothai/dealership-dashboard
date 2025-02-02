@@ -15,8 +15,6 @@ import {
   DialogContent,
   DialogTitle,
   TableSortLabel,
-  Tooltip,
-  Paper,
 } from '@mui/material'
 import { MdAdd, MdEdit } from 'react-icons/md'
 import { MdDeleteForever } from 'react-icons/md'
@@ -185,20 +183,8 @@ export default function DataTable({
           onChange={handleSearch}
         />
       </div>
-      <TableContainer
-        sx={{
-          maxWidth: '100%',
-          overflowX: 'auto',
-        }}
-      >
-        <Table
-          size="small"
-          sx={{
-            tableLayout: 'block',
-            '@media (min-width: 800px)': { display: 'table' },
-            minWidth: 420,
-          }}
-        >
+      <TableContainer className="table-container">
+        <Table size="small">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
@@ -322,7 +308,7 @@ export default function DataTable({
                     whiteSpace: 'nowrap',
                   }}
                 >
-                  <NoDataMessage message={'No Results'}/>
+                  <NoDataMessage message={'No Results'} />
                 </TableCell>
               </TableRow>
             )}

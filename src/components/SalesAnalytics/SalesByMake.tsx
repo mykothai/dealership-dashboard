@@ -3,6 +3,7 @@ import { CHART_COLORS } from '@constants'
 import { useMemo } from 'react'
 import { SalesData } from '@components/Dashboards/Sales'
 import NoDataMessage from '@components/NoDataAvailable'
+import { Card, Typography } from '@mui/material'
 
 interface Props {
   salesData: SalesData[]
@@ -23,19 +24,27 @@ export default function SalesByMake({ salesData }: Props) {
   }))
 
   return (
-    <div
-      style={{
+    <Card
+      sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         height: 'auto',
         margin: '10px 30px',
         overflow: 'hidden',
+        backgroundColor: 'white',
+        borderRadius: '10px',
       }}
     >
-      <h3 style={{ marginBottom: '10px', textAlign: 'center' }}>
+      <Typography
+        variant="subtitle2"
+        component="div"
+        align="center"
+        color="gray"
+        margin={'8px 0'}
+      >
         Sales by Make
-      </h3>
+      </Typography>
 
       {formattedData.length ? (
         <ResponsiveContainer width="100%" height={180}>
@@ -62,6 +71,6 @@ export default function SalesByMake({ salesData }: Props) {
       ) : (
         <NoDataMessage />
       )}
-    </div>
+   </Card>
   )
 }

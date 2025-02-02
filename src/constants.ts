@@ -19,7 +19,14 @@ export enum VehicleStatus {
 
 export const urlHeaders = ['photo_url', 'profile_picture_url']
 
-export const CHART_COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
+export const CHART_COLORS = [
+  '#5865F2',
+  '#00C49F',
+  '#9996F5',
+  '#F6AE2D',
+  '#F2545B',
+  '#2C2F33',
+]
 
 export enum Dashboards {
   SALES = 'Sales',
@@ -32,7 +39,7 @@ interface MenuOption {
   path: string
 }
 
-export const menuOptions: { [key: string]: MenuOption[] } = {
+export const MENU_OPTIONS: { [key: string]: MenuOption[] } = {
   principal: [
     { label: `${Dashboards.SALES}`, path: '/sales' },
     { label: `${Dashboards.USERS}`, path: '/users' },

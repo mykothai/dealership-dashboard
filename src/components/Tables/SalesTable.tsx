@@ -67,7 +67,7 @@ export default function SalesTable({ data, onDelete }: SalesTableProps) {
 
   return (
     <div>
-      <TableContainer>
+      <TableContainer className='table-container'>
         <Table size="small">
           <TableHead>
             <TableRow>
@@ -292,7 +292,7 @@ const StyledTableCell = styled(TableCell)(() => ({
 }))
 
 const StyledTableHeaderCell = styled(TableCell)(() => ({
-  backgroundColor: '#011936',
+  backgroundColor: '#5865F2',
   color: 'white',
   fontWeight: 'bold',
   borderBottom: 'none',
@@ -301,12 +301,12 @@ const StyledTableHeaderCell = styled(TableCell)(() => ({
 }))
 
 const StyledButton = styled(Button)(() => ({
-  backgroundColor: '#011936',
+  backgroundColor: '#5865F2',
   color: 'white',
   cursor: 'pointer',
 
   '&:hover': {
-    backgroundColor: '#0056b3',
+    backgroundColor: '#2c2f33',
   },
 }))
 
